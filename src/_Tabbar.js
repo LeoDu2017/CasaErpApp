@@ -89,10 +89,10 @@ const TabNavigator = createBottomTabNavigator({
         },
         //对于导航的stytles
         style: {
-            borderTopColor: '#e9f7fd',
+            borderTopColor: '#f2f2f2',
             borderTopWidth: 1,
             height: 60,
-            backgroundColor: '#f5fcff'
+            backgroundColor: '#fff'
         }
     }
 });
@@ -111,14 +111,14 @@ TabNavigator.navigationOptions = ({navigation}) => {
                 left: TITLE_OFFSET,
                 right: TITLE_OFFSET,
             },
-            headerTintColor: '#f5fcff',
+            headerTintColor: '#fff',
         }
     } else {
         return {
             headerTitle: '北京恒邦信大国际贸易有限公司',
             headerTintColor: '#24292e',
             headerStyle:{
-                backgroundColor: '#f5fcff',
+                backgroundColor: '#fff',
             }
         }
     }

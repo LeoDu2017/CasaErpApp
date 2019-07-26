@@ -1,9 +1,8 @@
 /**
  * Created by Leo on 2019/7/19
  */
-
-import React, {Component} from 'react';
-import md5 from "react-native-md5";
+import React, {Component} from 'react'
+import md5 from "react-native-md5"
 import {
     Text,
     View,
@@ -11,8 +10,7 @@ import {
     StatusBar,
     TextInput,
     TouchableOpacity
-} from 'react-native';
-
+} from 'react-native'
 import {connect} from 'react-redux'
 import {StackActions, NavigationActions} from 'react-navigation'
 import loginAction from './_actions'
@@ -40,7 +38,7 @@ class Screen extends Component {
 
     componentDidMount(): void {
         this._navListener = this.props.navigation.addListener('didFocus', () => {
-            StatusBar.setBackgroundColor('#f5fcff');
+            StatusBar.setBackgroundColor('#fff');
             StatusBar.setBarStyle('dark-content');
             //!IOS && StatusBar.setBackgroundColor('#6a51ae');
         });
@@ -109,5 +107,4 @@ export default connect(
         loginAction: bindActionCreators(loginAction, dispatch)
     })
 )(Screen)
-
 

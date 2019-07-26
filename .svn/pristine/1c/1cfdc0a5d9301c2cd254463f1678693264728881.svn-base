@@ -1,0 +1,110 @@
+import React, {Component} from 'react';
+import {
+    View,
+    Text,
+    Image,
+    ScrollView, StatusBar, ImageBackground,
+} from 'react-native';
+
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import styles from '../_styles'
+import actions from './_actions'
+import ModalDropdown from "../../../component/ModalDropdown";
+import {customNavigationOptions} from '../../../_Util'
+import Banner from '../_Component_banner'
+import Swiper from '../../../component/react-native-swiper';
+import Chart from '../_Component_chart_bar'
+import {blue, blue_a, green, orange, red} from "../_Constant";
+
+class Screen extends Component {
+    static  navigationOptions = ({navigation}) =>  ({
+        title: '客户统计',
+        ...customNavigationOptions(navigation,
+            <View style={{right: 15}}>
+                <ModalDropdown
+                    defaultValue={'2019年'}
+                    textStyle={{color: '#f5fcff', fontSize: 16}}
+                    dropdownTextStyle={{
+                        width: 120,
+                        fontSize: 16,
+                        borderBottomWidth: 1,
+                        borderColor: '#eee',
+                        textAlign: 'center'
+                    }}
+                    options={ navigation.state.params.years }
+                    renderRow = {
+                        (data) => <Text style={styles.year}>{`${data}年`}</Text>
+                    }
+                    renderButtonText = {
+                        (data) => <Text>{`${data}年`}</Text>
+                    }
+                    renderSeparator = {
+                        () =>  <View style={styles.separator} />
+                    }
+                    onSelect={(data) => {
+                        console.log('data:', data)
+                    }}
+                />
+            </View>),
+        headerTransparent: 'true',
+        headerTintColor: '#f5fcff',
+        headerStyle: {marginTop: 20}
+    });
+
+    constructor(props) {
+        super(props);
+        this._navListener = this.props.navigation.addListener('didFocus', () => {
+            StatusBar.setBackgroundColor('transparent');
+            StatusBar.setTranslucent(true);
+            StatusBar.setBarStyle('light-content');
+            //!IOS && StatusBar.setBackgroundColor('#6a51ae');
+        });
+    };
+
+    componentDidMount(): void {
+        this.props.init.fetch_years(this.props.navigation);
+    };
+    render() {
+        const {} = this.props.CUAchievement;
+
+        return (
+            <View style={styles.container}>
+                <Banner
+                    justify='space-between'
+                    top = {100}
+                    bottom={20}
+                    today={10}
+                    today_title= '今日客户总数(人)'
+                    month={100}
+                    month_title='本月客户总数(人)'
+                    year={1000}
+                    year_title='年度客户总数(人)'/>
+                <Swiper style={styles.Swiper_wrapper}>
+
+                    <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+
+                    </View>
+                    <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+
+                    </View>
+                    <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+
+                    </View>
+                    <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+
+                    </View>
+                </Swiper>
+            </View>
+        );
+    };
+
+    componentWillUnmount(): void {
+        this._navListener.remove();
+    };
+}
+
+export default connect(
+    ({CUAchievement}) => ({CUAchievement}),
+    (dispatch) => ({init: bindActionCreators(actions, dispatch)})
+)(Screen)

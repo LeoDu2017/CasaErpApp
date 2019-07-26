@@ -1,0 +1,14 @@
+const defaultUser = {
+    name: 'aaa',
+}
+
+const showUserData = (state = defaultUser, action) => {
+    switch(action.type) {
+        case 'SHOW_USER_HOME':
+            return state;
+        default:
+            return state;
+    }
+}
+
+export default showUserData;

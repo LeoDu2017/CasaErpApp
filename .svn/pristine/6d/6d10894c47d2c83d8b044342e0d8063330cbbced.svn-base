@@ -1,0 +1,54 @@
+/**
+ * buttonSetting.js 用于设置列表页的按钮
+ * text:（必填）按钮文字内容,
+ * buttonStyle: (选填) 按钮样式,
+ * textStyle: (选填) 按钮中的文字的样式,
+ * useModal: (必填) 是否使用弹窗，true/false,
+ * modalSetting: 如果指定 userModal: true 则必填,其中有2个参数：
+                 modalTitle: 弹窗的提示文字
+                 modalBody: 弹窗体中的内容
+ */
+
+import React from 'react';
+import {
+    TextInput
+} from 'react-native';
+import pxToDp from '../../../../utils/aoto';
+
+
+const buttonSet = [
+    {
+        text: '评论',
+        buttonStyle: {},
+        textStyle: {},
+        useModal: true,
+        modalSetting: {
+            modalTitle: '提交评论',
+            modalBody: <TextInput
+                            style={{ width: pxToDp(400), fontSize: 14, color: '#333333', backgroundColor: '#eef0f2', borderRadius: 3 }}
+                            clearTextOnFocus={true}
+                            multiline={true}
+                            placeholder='请输入评论'
+                            textAlignVertical='top'
+                            numberOfLines={3}
+                        />
+        }
+    }, {
+        text: '退回',
+        buttonStyle: {},
+        textStyle: {},
+        useModal: false,
+    }, {
+        text: '通过',
+        buttonStyle: {
+            borderColor: '#3595fb',
+            backgroundColor: '#3595fb',
+        },
+        textStyle: {
+            color: '#ffffff'
+        },
+        useModal: false,
+    }
+]
+
+ export default buttonSet;

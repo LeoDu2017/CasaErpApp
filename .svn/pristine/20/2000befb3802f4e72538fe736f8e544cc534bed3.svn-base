@@ -1,0 +1,24 @@
+import React, {Component} from 'react';
+import { Text } from 'react-native';
+import Drawer from 'react-native-drawer'
+
+
+class FilterDrawer extends Component () {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Drawer
+                type="static"
+                content={<ControlPanel />}
+                openDrawerOffset={100}
+                styles={drawerStyles}
+                tweenHandler={Drawer.tweenPresets.parallax}
+            >
+                <Text></Text>
+            </Drawer>
+        )
+    }
+}

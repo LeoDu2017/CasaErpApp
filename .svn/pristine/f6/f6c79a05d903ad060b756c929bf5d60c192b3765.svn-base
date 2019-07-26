@@ -1,0 +1,67 @@
+import {
+    LOADING_COMPREHENSIVE,
+    LOADING_ERROR,
+    LOADING_SUCCESS,
+    LOADED_YEARS,
+    SET_SALES
+} from "./_actionTypes";
+import {
+    COAchievement_fetch_years,
+    COAchievement_fetch_sales
+} from '../../../_Service'
+
+const fetch_years = (navigation) => {
+    return (dispatch) => {
+        dispatch(doing());
+        COAchievement_fetch_years().then(({status,data,msg}) => {
+            if(status){
+                dispatch(fetch_sales(data));
+                navigation.setParams({years:data})
+            }else{
+                alert(msg)
+            }
+        })
+
+    }
+};
+const fetch_sales = (data) => {
+
+    return (dispatch) => {
+        COAchievement_fetch_sales({year:data[0]}).then(({status,data,msg}) => {
+            if(status){
+                dispatch(set_sales(data))
+            }
+        })
+    }
+};
+function doing(){
+    return {
+        type : LOADING_COMPREHENSIVE
+    }
+}
+function success(comprehensive){
+    return {
+        type : LOADING_SUCCESS,
+        comprehensive
+    }
+}
+function error(){
+    return {
+        type : LOADING_ERROR
+    }
+}
+function setYears(years) {
+    return {
+        type : LOADED_YEARS,
+        years
+    }
+}
+function set_sales(data){
+    return {
+        type: SET_SALES,
+        ...data
+    }
+}
+export default{
+    fetch_years
+}

@@ -1,0 +1,19 @@
+/**
+ * buttonSetting.js 用于设置列表页的按钮
+ */
+
+ const buttonSet = [
+     {
+        text: '审批',
+        buttonStyle: {
+            borderColor: '#3595fb',
+            backgroundColor: '#3595fb',
+        },
+        textStyle: {
+            color: '#ffffff'
+        },
+        useModal: false,
+     }
+ ]
+
+ export default buttonSet;

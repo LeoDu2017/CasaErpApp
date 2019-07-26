@@ -1,0 +1,75 @@
+import React from 'react';
+import {
+    Text,
+    View,
+    ScrollView
+} from 'react-native';
+
+import style from './style';
+
+
+class OrderScreen extends React.Component {
+  render() {
+    return (
+        <ScrollView>
+            <View style={{ backgroundColor: '#ffffff' }}>
+                <View style={[style.title, style.structure]}>
+                    <View style={style.lightBox}></View>
+                    <View>
+                        <Text style={style.titleText}>订单信息</Text>
+                    </View>
+                </View>
+                <View style={[style.infoBox, style.structure]}>
+                    <View style={style.infoLine}>
+                        <Text style={style.infoKey}>订单货期</Text>
+                        <Text style={style.infoValue}>1个月</Text>
+                    </View>
+                    <View style={style.infoLine}>
+                        <Text style={style.infoKey}>发票需求</Text>
+                        <Text style={style.infoValue}>开公司发票</Text>
+                    </View>
+                    <View style={style.infoLine}>
+                        <Text style={style.infoKey}>合同折扣</Text>
+                        <Text style={style.infoValue}>￥123456</Text>
+                    </View>
+                    <View>
+                        <Text style={[style.infoKey, { paddingVertical: 10 }]}>合同金额</Text>
+                        <View style={{ borderBottomWidth: 1, borderColor: '#e8e8e8' }}>
+                            <View style={style.infoLine_between}>
+                                <Text style={style.infoKey}>收款金额</Text>
+                                <Text style={style.infoValue}>￥123456</Text>
+                            </View>
+                            <View style={style.infoLine_between}>
+                                <Text style={style.infoKey}>中款金额</Text>
+                                <Text style={style.infoValue}>￥123456</Text>
+                            </View>
+                            <View style={style.infoLine_between}>
+                                <Text style={style.infoKey}>尾款金额</Text>
+                                <Text style={style.infoValue}>￥123456</Text>
+                            </View>
+                            <View style={style.infoLine_between}>
+                                <Text style={style.infoKey}>佣金金额</Text>
+                                <Text style={style.infoValue}>￥123456</Text>
+                            </View>
+                            <View style={style.infoLine_between}>
+                                <Text style={style.infoKey}>税费</Text>
+                                <Text style={style.infoValue}>￥123456</Text>
+                            </View>
+                            <View style={style.infoLine_between}>
+                                <Text style={style.infoKey}>其他费用</Text>
+                                <Text style={style.infoValue}>￥123456</Text>
+                            </View>
+                        </View>
+                        <View style={[style.infoLine_between, { height: 43 }]}>
+                            <Text style={style.infoKey}>合计</Text>
+                            <Text style={style.infoValue}>￥123456</Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
+        </ScrollView>
+    );
+  }
+}
+
+export default OrderScreen;

@@ -1,0 +1,44 @@
+/**
+ * buttonSetting.js 用于设置列表页的按钮
+ */
+import React from 'react';
+import {
+    TextInput
+} from 'react-native';
+import pxToDp from '../../../../utils/aoto';
+
+
+const buttonSet = [
+    {
+        text: '评论',
+        buttonStyle: {},
+        textStyle: {},
+        useModal: true,
+        modalSetting: {
+            modalTitle: '提交评论',
+            modalBody: <TextInput
+                            style={{ width: pxToDp(400), fontSize: 14, color: '#333333', backgroundColor: '#eef0f2', borderRadius: 3 }}
+                            clearTextOnFocus={true}
+                            multiline={true}
+                            placeholder='请输入评论'
+                            textAlignVertical='top'
+                            numberOfLines={3}
+                        />
+        }
+    }, {
+        text: '退回',
+        buttonStyle: {},
+        textStyle: {}
+    }, {
+        text: '审批',
+        buttonStyle: {
+            borderColor: '#3595fb',
+            backgroundColor: '#3595fb',
+        },
+        textStyle: {
+            color: '#ffffff'
+        }
+    }
+]
+
+ export default buttonSet;

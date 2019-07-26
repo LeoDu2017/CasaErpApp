@@ -1,0 +1,31 @@
+import { createMaterialTopTabNavigator } from 'react-navigation';
+
+import ChangeScreen from './navigationPages/ChangeScreen';
+import ProjectScreen from './navigationPages/ProjectScreen';
+import ApprovalScreen from './navigationPages/ApprovalScreen';
+
+
+const TabNavigation = createMaterialTopTabNavigator({
+    '变更信息': ChangeScreen,
+    '产品信息': ProjectScreen,
+    '审批信息': ApprovalScreen,
+}, {
+    // lazy: true,
+    tabBarOptions: {
+        activeTintColor: '#3496FB',
+        // scrollEnabled: true,
+        labelStyle: {
+          fontSize: 15,
+          color: '#333333'
+        },
+        style: {
+            height: 50,
+            backgroundColor: '#ffff',
+            elevation: 0,
+            borderBottomWidth: 1,
+            borderColor: '#e8e8e8'
+        },
+      }
+});
+
+export default TabNavigation;

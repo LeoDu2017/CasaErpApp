@@ -1,0 +1,11 @@
+import request from './_Request'
+import API from './_Api'
+
+// 登录
+export function login(data){
+    return request({
+        url:API.Login,
+        method: 'post',
+        data
+    })
+}

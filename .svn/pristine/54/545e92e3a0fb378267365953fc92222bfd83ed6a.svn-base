@@ -1,0 +1,114 @@
+import React, { Component } from 'react';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, Image, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+
+import pxToDp from '../../../utils/aoto';
+
+
+class Login extends Component {
+    constructor(pops) {
+        super(pops);
+
+        this.state = {
+            userName: '',
+            password: ''
+        }
+        
+        this.onPressLogin = this.onPressLogin.bind(this);
+    }
+
+    componentDidMount() {
+        console.log(this.props);
+    }
+
+    onPressLogin() {
+        const { userName, password } = this.state;
+
+        if(userName === '' || password === '') {
+            console.log('账号密码不能为空');
+        } else {
+            this.props.navigation.navigate('Home');
+        }
+    }
+
+    render() {
+        return (
+            <View style={{flex: 1, backgroundColor: '#fff'}}>
+                <View style={styles.imgBox}>
+                    <Image resizeMode={'cover'} style={styles.header_top_wrap_img} source={require('../../../../public/img/login/pic.png')} />
+                </View>
+                <View style={styles.loginInput}>
+                    <TextInput
+                        style={styles.textInput}
+                        autoFocus={true}
+                        inlineImageLeft='input_user'
+                        inlineImagePadding={20}
+                        placeholder='请输入您的账户'
+                        onChangeText={(userName) =>this.setState({ userName })}
+                        value={this.state.userName}
+                    />
+                    <TextInput
+                        style={styles.textInput}
+                        clearTextOnFocus={true}
+                        secureTextEntry={true}
+                        inlineImageLeft='input_key'
+                        inlineImagePadding={20}
+                        placeholder='请输入您的密码'
+                        onChangeText={(password) =>this.setState({ password })}
+                        value={this.state.password}
+                    />
+                </View>
+                <View>
+                    <TouchableOpacity style={styles.button} onPress={this.onPressLogin}>
+                        <Text style={styles.buttonText}>立即登录</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+}
+
+
+const { width, height } = Dimensions.get('window');
+let styles = StyleSheet.create({
+    header_top_wrap_img: {
+        width: win.width,
+    },
+    imgBox: {
+        marginTop: 20
+    },
+    loginInput: {
+        flexDirection: 'column',
+        marginTop: 30
+    },
+    textInput: {
+        width: pxToDp(550),
+        height: 40,
+        marginHorizontal: ((width-pxToDp(550)) / 2),
+        flexDirection: 'row',
+        justifyContent: 'center',
+        fontSize: 14,
+        borderBottomWidth: 1,
+        borderColor: '#e1e1e1',
+        marginBottom: 10
+    },
+    button: {
+        width: pxToDp(550),
+        height: 40,
+        marginHorizontal: ((width-pxToDp(550)) / 2),
+        backgroundColor: '#108ee9',
+        borderRadius: 50,
+        marginTop: 30
+    },
+    buttonText: {
+        textAlign: 'center',
+        fontSize: 18,
+        lineHeight: 40,
+        color: '#ffffff'
+    }
+})
+
+export default Login;
+
+
+

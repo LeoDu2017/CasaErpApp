@@ -1,0 +1,15 @@
+'use strict';
+import {combineReducers} from 'redux'
+import loginIn from './pages/Login/_reducer'
+import Menus from './pages/Home/_reducer'
+import User from './pages/Ucenter/_reducer'
+import {MAftersale,DAftersale,ADtails} from './pages/Aftersale/_reducer'
+import {MDReport,NMDReport,MRDetails,DDReport,MWReport} from './pages/Report/_reducer'
+import {COAchievement,CUAchievement,QUAchievement} from './pages/Achievement/_reducer'
+
+const rootReducer = combineReducers({
+    loginIn,Menus,User,MDReport,NMDReport,MRDetails,DDReport,MWReport,COAchievement,CUAchievement,
+    QUAchievement,MAftersale,DAftersale,ADtails
+});
+
+export default rootReducer;//导出，作为统一入口

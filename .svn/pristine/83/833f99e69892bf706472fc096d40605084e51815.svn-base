@@ -1,0 +1,22 @@
+/**
+ * buttonSetting.js 用于设置列表页的按钮
+ */
+
+ const buttonSet = [
+    {
+        text: '退回',
+        buttonStyle: {},
+        textStyle: {}
+    }, {
+        text: '审批',
+        buttonStyle: {
+            borderColor: '#3595fb',
+            backgroundColor: '#3595fb',
+        },
+        textStyle: {
+            color: '#ffffff'
+        }
+    }
+]
+
+ export default buttonSet;

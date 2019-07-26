@@ -1,0 +1,26 @@
+import request from './_Request'
+import API from './_Api'
+
+// 登录
+export function login(data){
+    return request({
+        url:API.Login,
+        method: 'post',
+        data
+    })
+}
+// 综合业绩_年份
+export function COAchievement_fetch_years(){
+    return request({
+        url:API.COAchievement.fetch_years,
+        method: 'post',
+    })
+}
+// 综合业绩_销售数据
+export function COAchievement_fetch_sales(data){
+    return request({
+        url:API.COAchievement.fetch_sales,
+        method: 'post',
+        ...data
+    })
+}

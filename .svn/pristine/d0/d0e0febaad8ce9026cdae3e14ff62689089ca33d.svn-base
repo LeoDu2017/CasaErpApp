@@ -1,0 +1,30 @@
+import { createMaterialTopTabNavigator } from 'react-navigation';
+
+import ClientScreen from './navigationPages/ClientScreen';
+import OrderScreen from './navigationPages/OrderScreen';
+import ApprovalScreen from './navigationPages/ApprovalScreen';
+
+
+const TabNavigation = createMaterialTopTabNavigator({
+    '客户信息': ClientScreen,
+    '订单信息': OrderScreen,
+    '审批信息': ApprovalScreen,
+}, {
+    // lazy: true,
+    tabBarOptions: {
+        activeTintColor: '#3496FB',
+        labelStyle: {
+          fontSize: 15,
+          color: '#333333'
+        },
+        style: {
+            height: 50,
+            backgroundColor: '#ffff',
+            elevation: 0,
+            borderBottomWidth: 1,
+            borderColor: '#e8e8e8'
+        },
+      }
+});
+
+export default TabNavigation;

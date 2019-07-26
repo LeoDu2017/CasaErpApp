@@ -1,0 +1,23 @@
+import { actionType } from '../../constants/actionType';
+
+
+export const saveUserData = ({ ...param }) => {
+    return {
+        type: actionType.SAVE_USERDATA_LOGIN,
+        ...param
+    }
+}
+
+export const changeUserName = userName => {
+    return {
+        type: 'CHANGE_USERNAME',
+        userName
+    }
+}
+
+export const changePassword = password => {
+    return {
+        type: 'CHANGE_PASSWORD',
+        password
+    }
+}

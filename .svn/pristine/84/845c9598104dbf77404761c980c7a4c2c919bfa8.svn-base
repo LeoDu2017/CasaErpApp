@@ -1,0 +1,17 @@
+/**
+ * infoSetting.js 用于设置列表页需要展示的key和value
+ * 
+ */
+import React from 'react';
+import { View } from 'react-native';
+
+ const infoSet = {
+    clientName: '客户姓名',
+    projectName: '项目名称',
+    submitPerson: '提交人',
+    time: '成单时间',
+    quoteStatus: '订单进度',
+    line1: <View style={{ width: 230, height: 10, backgroundColor: '#F1C68D', borderRadius: 5 }} />
+ }
+
+ export default infoSet;

@@ -1,0 +1,14 @@
+/**
+ * infoSetting.js 用于设置列表页需要展示的key和value
+ * 
+ */
+
+ const infoSet = {
+    clientName: '配送地址',
+    submitPerson: '提交人',
+    submitTime: '提交时间',
+    finalAmount: '尾款金额',
+    state: '状态'
+ }
+
+ export default infoSet;

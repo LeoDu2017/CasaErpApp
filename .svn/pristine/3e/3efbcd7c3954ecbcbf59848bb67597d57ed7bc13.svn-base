@@ -1,0 +1,71 @@
+import React, { Component } from 'react';
+import {
+    Text,
+    View,
+    Image,
+    DrawerLayoutAndroid,
+} from 'react-native';
+
+import ShowList from '../../../common/ShowList';
+import infoSet from './infoSetting';
+
+
+class DepartmentOrder extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: [{
+                id: '0',
+                contractId: '合同编号：1234567890',
+                contractState: '下单及运输中',
+                clientName: '四月天',
+                projectName: '意大利之家',
+                submitPerson: '古月',
+                time: '2019.2.2 22:22',
+                quoteStatus: '',
+                line1: '米兰采购7件'
+            }]
+        }
+    }
+
+    static navigationOptions = {
+        title: '部门订单',
+        headerRight:<View style={{ width: 80, flex: 1, flexDirection: 'row', justifyContent: 'space-around', marginRight: 10 }}>
+            <Image  source={require('../../../../../public/img/pendingReview/nav_select.png')} />
+            <Image source={require('../../../../../public/img/pendingReview/nav_search.png')} />
+        </View>,
+        headerStyle: {
+            backgroundColor: '#ffffff',
+        },
+        headerTintColor: '#333333',
+        headerTitleStyle: {
+            flex: 1,
+            textAlign: 'center'
+        }
+    };
+
+    render() {
+        const navigationView = (
+            <View style={{flex: 1, backgroundColor: '#fff'}}>
+              <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
+            </View>
+        );
+        return (
+            <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Right}
+                renderNavigationView={() => navigationView}
+            >
+                <ShowList
+                    data={this.state.data}
+                    infoSet={infoSet}
+                    navigation={this.props.navigation}
+                    navigationName='orderQuote/DepartmentOrder/Info'
+                />
+            </DrawerLayoutAndroid>
+        );
+    }
+}
+
+export default DepartmentOrder;

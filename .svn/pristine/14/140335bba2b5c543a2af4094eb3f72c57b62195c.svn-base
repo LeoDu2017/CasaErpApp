@@ -1,0 +1,28 @@
+import React from 'react'
+import styles from "./_styles";
+import {ImageBackground, Text, View} from "react-native";
+
+const Banner = ({month_sale, year_sale}) => {
+    return (
+        <ImageBackground
+            resizeMode={'stretch'}
+            style={{...styles.banner}}
+            source={require('../../assets/images/achievement/banner.png')}>
+            <View style={styles.banner_wrapper}>
+                <View style={styles.banner_item}>
+                    <Text style={styles.title}>本月销售总额(元)</Text>
+                    <Text style={styles.title}>{month_sale}</Text>
+                </View>
+                <View style={styles.division}>
+
+                </View>
+                <View style={styles.banner_item}>
+                    <Text style={styles.title}>年度销售总额(元)</Text>
+                    <Text style={styles.title}>{year_sale}</Text>
+                </View>
+            </View>
+        </ImageBackground>
+    )
+};
+
+export default Banner

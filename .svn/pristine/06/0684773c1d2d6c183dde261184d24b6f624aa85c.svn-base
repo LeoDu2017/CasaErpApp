@@ -1,0 +1,111 @@
+import React, {Component, Fragment} from 'react';
+import {View, Text, ImageBackground, Image, StyleSheet, Dimensions, TextInput, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
+import pxToDp from "../../../../utils/aoto";
+
+
+class Index extends Component {
+    constructor(pops) {
+        super(pops);
+        this.state = {
+            origin_pwd: '',
+            new_pwd: ''
+        };
+        this.onSubmit = this.onSubmit.bind(this);
+    };
+    onSubmit() {
+        const { origin_pwd, new_pwd } = this.state;
+        if(origin_pwd === '' || new_pwd === '') {
+            console.log('账号密码不能为空');
+        } else {
+            this.props.navigation.navigate('Home');
+        }
+    }
+    render() {
+        return (
+            <View style={{flex: 1, backgroundColor: '#fff'}}>
+                <View style={styles.loginInput}>
+                    <View style={styles.input_wrap}>
+                        <Image resizeMode='stretch' style={styles.icon} source={requirew('../../../../../public/img/login/input_key.png')}/>
+                        <TextInput
+                            style={styles.textInput}
+                            autoFocus={true}
+                            secureTextEntry={true}
+                            placeholder='请输入原密码'
+                            onChangeText={(origin_pwd) =>this.setState({ origin_pwd })}
+                            value={this.state.origin_pwd}
+                        />
+                    </View>
+                    <View style={styles.input_wrap}>
+                        <Image resizeMode='stretch' style={styles.icon} source={require('../../../../../public/img/login/input_key.png')}/>
+
+                        <TextInput
+                            style={styles.textInput}
+                            clearTextOnFocus={true}
+                            secureTextEntry={true}
+                            placeholder='请输入新密码'
+                            onChangeText={(new_pwd) =>this.setState({new_pwd })}
+                            value={this.state.new_pwd}
+                        />
+                    </View>
+                </View>
+                <View>
+                    <TouchableOpacity style={styles.button} onPress={this.onSubmit}>
+                        <Text style={styles.buttonText}>提交</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+}
+
+const { width, height } = Dimensions.get('window');
+const styles = StyleSheet.create({
+    loginInput: {
+        flexDirection: 'column',
+        marginTop: 30
+    },
+    avatar:{
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+    },
+
+    input_wrap:{
+        width: pxToDp(550),
+        height: 40,
+        marginHorizontal: ((width - pxToDp(550)) / 2),
+        flexDirection: 'row',
+        fontSize: 14,
+        borderBottomWidth: 1,
+        borderColor: '#e1e1e1',
+        marginBottom: 10,
+        alignItems: 'center',
+    },
+    textInput: {
+        width: pxToDp(550) - 20,
+        height: 40,
+        flexDirection: 'row',
+        fontSize: 14,
+    },
+    button: {
+        width: pxToDp(550),
+        height: 40,
+        marginHorizontal: ((width-pxToDp(550)) / 2),
+        backgroundColor: '#108ee9',
+        borderRadius: 50,
+        marginTop: 30
+    },
+    buttonText: {
+        textAlign: 'center',
+        fontSize: 18,
+        lineHeight: 40,
+        color: '#ffffff'
+    },
+    icon:{
+        height: 20,
+        width: 20
+    }
+});
+
+export default Index;

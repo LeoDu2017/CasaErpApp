@@ -1,0 +1,72 @@
+import React, { Component } from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    DrawerLayoutAndroid,
+} from 'react-native';
+
+import ShowList from '../../../common/ShowList';
+import infoSet from './infoSetting';
+import buttonSet from './buttonSetting';
+
+
+class Invoice extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: [{
+                id: '0',
+                contractId: '合同编号：1234567890',
+                clientName: '四月天',
+                submitPerson: 'nani',
+                submitTime: '2019.2.2 22:22',
+                finalAmount: '$654321',
+                state: '待审批',
+            }],
+        }
+    }
+
+    static navigationOptions = {
+        title: '待审核发货单',
+        headerRight:<View style={{ width: 80, flex: 1, flexDirection: 'row', justifyContent: 'space-around', marginRight: 10 }}>
+            <Image source={require('../../../../../public/img/pendingReview/nav_select.png')} />
+            <Image source={require('../../../../../public/img/pendingReview/nav_search.png')} />
+        </View>,
+        headerStyle: {
+            backgroundColor: '#ffffff',
+        },
+        headerTintColor: '#333333',
+        headerTitleStyle: {
+            flex: 1,
+            textAlign: 'center'
+        }
+    };
+
+    render() {
+        const navigationView = (
+            <View style={{flex: 1, backgroundColor: '#fff'}}>
+              <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
+            </View>
+        );
+        return (
+            <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Right}
+                renderNavigationView={() => navigationView}
+            >
+                <ShowList
+                    data={this.state.data}
+                    infoSet={infoSet}
+                    buttonSet={buttonSet}
+                    navigation={this.props.navigation}
+                    navigationName='pendingReview/Invoice/Info'
+                />
+            </DrawerLayoutAndroid>
+        );
+    }
+}
+
+export default Invoice;

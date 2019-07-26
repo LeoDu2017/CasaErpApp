@@ -1,0 +1,179 @@
+import React, {Component} from 'react';
+import {
+    StyleSheet,
+    Dimensions,
+    Text,
+    View,
+    Image,
+    TouchableOpacity
+} from 'react-native';
+
+import pxToDp from '../../../../utils/aoto';
+
+
+class DepartmentQuoteInfo extends Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            _id: this.props.navigation.state.params.id
+        }
+    }
+
+    static navigationOptions = {
+        title: '报价详情',
+        headerRight: <View/>,
+        headerStyle: {
+            backgroundColor: '#ffffff',
+        },
+        headerTintColor: '#333333',
+        headerTitleStyle: {
+            flex: 1,
+            textAlign: 'center'
+        }
+    };
+
+    render() {
+        return (
+            <View>
+                <View style={[style.itemPosition, style.itemInfo]}>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>报价单号</Text>
+                        <Text style={style.itemText}>123456</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>客户名称</Text>
+                        <Text style={style.itemText}>某某</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>项目名称</Text>
+                        <Text style={style.itemText}>意大利之家</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>提交人</Text>
+                        <Text style={style.itemText}>古月</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>产品数量</Text>
+                        <Text style={style.itemText}>2</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>产品总价</Text>
+                        <Text style={style.itemText}>￥121245</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>运费总计</Text>
+                        <Text style={style.itemText}>￥15</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>总计</Text>
+                        <Text style={style.itemText}>￥151515</Text>
+                    </View>
+                </View>
+                <View style={style.tab}>
+                    <View style={{ backgroundColor: '#ffffff' }}>
+                        <View style={[style.projectTitle, style.structure]}>
+                            <View style={style.lightBox}></View>
+                            <View>
+                                <Text style={style.titleText}>产品信息</Text>
+                            </View>
+                        </View>
+                        <View style={style.structure}>
+                            <View>
+                                <View style={style.projectInfo}>
+                                    <Image resizeMode='cover' style={{ width: 104, height: 69 }} source={require('../../../../../public/img/info/pic.png')}/>
+                                    <View style={{ marginLeft: 15 }}>
+                                        <View style={style.projectInfoLine}>
+                                            <Text style={style.projectTextKey}>产品编号：</Text>
+                                            <Text style={style.projectTextValue}>123456</Text>
+                                        </View>
+                                        <View style={style.projectInfoLine}>
+                                            <Text style={style.projectTextKey}>产品名称：</Text>
+                                            <Text style={style.projectTextValue}>简约现代主义真皮沙发</Text>
+                                        </View>
+                                        <View style={style.projectInfoLine}>
+                                            <Text style={style.projectTextKey}>产品品牌：</Text>
+                                            <Text style={style.projectTextValue}>PPPPPLLLLLL</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={[style.infoLine_between, { height: 42 }]}>
+                                    <Text style={style.projectTextKey}>属性规格</Text>
+                                    <Image source={require('../../../../../public/img/info/arrow_down.png')} />
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </View>
+        );
+    }
+}
+
+const { width, height } = Dimensions.get('window');
+let style = StyleSheet.create({
+    structure: {
+        width: (width - 30),
+        marginLeft: 15,
+    },
+    itemPosition: {
+        paddingHorizontal: pxToDp(20),
+        marginVertical: 10,
+        backgroundColor: '#ffffff'
+    },
+    itemList: {
+        height: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    itemInfo: {
+        paddingVertical: 7
+    },
+    itemText: {
+        fontSize: 14,
+        color: '#333333'
+    },
+    lightBox: {
+        width: 3,
+        height: 14,
+        backgroundColor: '#3496FB',
+        marginRight: 9,
+        marginTop: 2
+    },
+    infoLine_between: {
+        flexDirection: 'row',
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    titleText: {
+        fontSize: 14,
+        color: '#333333',
+        fontWeight: '200',
+    },
+    projectTitle: {
+        flexDirection: 'row',
+        height: 50,
+        alignItems: 'center',
+    },
+    projectInfo: {
+        flexDirection: 'row'
+    },
+    projectInfoLine: {
+        flexDirection: 'row',
+        height: 25,
+        alignItems: 'center',
+    },
+    projectTextKey: {
+        color: '#999999'
+    },
+    projectTextValue: {
+        color: '#333333'
+    },
+    tab: {
+        backgroundColor: '#FFFFFF'
+    }
+});
+
+export default DepartmentQuoteInfo;

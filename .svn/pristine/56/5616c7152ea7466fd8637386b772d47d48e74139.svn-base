@@ -1,0 +1,96 @@
+import React from 'react';
+import {
+    Text,
+    View,
+    ScrollView
+} from 'react-native';
+
+import style from './style';
+
+
+class ChangeScreen extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            tableData: [
+                {
+                    key: 0,
+                    value: ['订单总金额/元', '123', '456']
+                }, {
+                    key: 1,
+                    value: ['订单折扣/元', '123', '456']
+                }, {
+                    key: 2,
+                    value: ['付款方式', '123', '456']
+                }, {
+                    key: 3,
+                    value: ['首款总额/元', '123', '456']
+                }, {
+                    key: 4,
+                    value: ['中款总额/元', '123', '456']
+                }, {
+                    key: 5,
+                    value: ['订单期货', '123', '456']
+                }, {
+                    key: 6,
+                    value: ['佣金/元', '123', '456']
+                }, {
+                    key: 7,
+                    value: ['保质金/元', '123', '456']
+                }, {
+                    key: 8,
+                    value: ['滞纳金/元', '123', '456']
+                }, {
+                    key: 9,
+                    value: ['税费总额/元', '123', '456']
+                }, {
+                    key: 10,
+                    value: ['运费总额/元', '123', '456']
+                }, {
+                    key: 11,
+                    value: ['其他费用/元', '123', '456']
+                }, {
+                    key: 12,
+                    value: ['赔款总额/元', '123', '456']
+                }, {
+                    key: 13,
+                    value: ['发票需求', '不需要开发票', '需要开发票']
+                }
+            ]
+        }
+    }
+
+    render() {
+        return (
+            <ScrollView>
+                <View style={{ backgroundColor: '#ffffff' }}>
+                    <View style={[style.title, style.structure]}>
+                        <View style={style.lightBox}></View>
+                        <View>
+                            <Text style={style.titleText}>变更信息</Text>
+                        </View>
+                    </View>
+                    <View style={[style.infoTable, style.structure]}>
+                        <View style={style.infoTableLine}>
+                            <Text style={[style.infoTableItem, { backgroundColor: '#EBEFF2' }]}>变更项目</Text>
+                            <Text style={[style.infoTableItem, { backgroundColor: '#EBEFF2' }]}>变更前</Text>
+                            <Text style={[style.infoTableItem, { backgroundColor: '#EBEFF2' }]}>变更后</Text>
+                        </View>
+                        {this.state.tableData.map(item => {
+                            return (
+                                <View key={item.key} style={style.infoTableLine}>
+                                    <Text style={[style.infoTableItem, { backgroundColor: '#EBEFF2' }]}>{item.value[0]}</Text>
+                                    <Text style={style.infoTableItem}>{item.value[1]}</Text>
+                                    <Text style={style.infoTableItem}>{item.value[2]}</Text>
+                                </View>
+                            )
+                        })}
+                    </View>
+                </View>
+            </ScrollView>
+        );
+    }
+}
+
+export default ChangeScreen;

@@ -1,0 +1,285 @@
+/**
+ * 因为路由需要引入的文件比较多，单独使用一个js做管理
+ */
+import {View} from "react-native";
+
+import Login from '../components/pages/login';
+import Home from '../components/pages/main';
+import NavigationCustomBackMenu from "../components/common/nav_back_menu";
+import Ucenter from '../components/pages/main/my';
+import ModifyPassword from '../components/pages/main/my/modify_password';
+import ModifyPhone from '../components/pages/main/my/modify_phone';
+
+// 日报系统
+import {MyDayReport,MyDayReportDetail,DeDayReport,MyWeekReport,MyWeekReportDetail,DeWeekReport} from '../components/pages/ReportSystem';
+
+// 待审核
+import { ContractApproval, Invoice, OrderChange, OrderReview, ContractApprovalInfo, InvoiceInfo, OrderReviewInfo, OrderChangeInfo } from '../components/pages/pendingReview'
+
+// 订单与报价
+import { 
+    MyQuote,
+    MyQuoteInfo,
+    DepartmentQuota,
+    DepartmentQuotaInfo,
+    MyOrder,
+    MyOrderInfo,
+    DepartmentOrder,
+    DepartmentOrderInfo,
+    MyContractApproval,
+    MyContractApprovalInfo,
+    DepartmentContractApproval,
+    DepartmentContractApprovalInfo,
+    MyChangeOrder,
+    MyChangeOrderInfo,
+    DepartmentChangeOrder,
+    DepartmentChangeOrderInfo,
+    MyInvoice,
+    MyInvoiceInfo,
+    DepartmentInvoice,
+    DepartmentInvoiceInfo
+} from '../components/pages/orderQuote'
+
+
+const StackRouteConfigs = {
+    Login:{
+      screen: Login,
+      navigationOptions: {
+          header: null
+      }
+    },
+    Main: {
+        screen: Home,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Ucenter: {
+        screen: Ucenter,
+        navigationOptions: {
+            header: null
+        }
+    },
+    'Ucenter/ModifyPassword': {
+        screen: ModifyPassword,
+        navigationOptions: ({navigation}) => ({
+            title: '修改密码',
+            headerLeft: <NavigationCustomBackMenu nav = {navigation} />,
+            headerRight:<View />,
+            headerStyle: {
+                backgroundColor: '#ffffff',
+            },
+            headerTintColor: '#333333',
+            headerTitleStyle: {
+                alignSelf: 'center',
+                fontSize: 18
+            },
+
+        })
+    },
+    'Ucenter/ModifyPhone':{
+        screen: ModifyPhone,
+        navigationOptions: ({navigation}) => ({
+            title: '修改手机号',
+            headerLeft: <NavigationCustomBackMenu nav = {navigation} />,
+            headerRight:<View />,
+            headerStyle: {
+                backgroundColor: '#ffffff',
+            },
+            headerTintColor: '#333333',
+            headerTitleStyle: {
+                alignSelf: 'center',
+                fontSize: 18
+            },
+
+        })
+    },
+    'ReportSystem/Day/MyReport':{
+        screen: MyDayReport
+    },
+    'ReportSystem/Day/DeReport':{
+        screen: DeDayReport
+    },
+    'ReportSystem/Day/MyReportDetail':{
+        screen: MyDayReportDetail
+    },
+    'ReportSystem/Week/MyReport':{
+        screen: MyWeekReport
+    },
+    'ReportSystem/Week/MyReportDetail':{
+        screen: MyWeekReportDetail
+    },
+    'ReportSystem/Week/DeReport':{
+        screen: DeWeekReport
+    },
+    'pendingReview/OrderReview': {
+        screen: OrderReview,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'pendingReview/ContractApproval': {
+        screen: ContractApproval,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'pendingReview/OrderChange': {
+        screen: OrderChange,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'pendingReview/Invoice': {
+        screen: Invoice,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'pendingReview/OrderReview/Info': {
+        screen: OrderReviewInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'pendingReview/ContractApproval/Info': {
+        screen: ContractApprovalInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'pendingReview/Invoice/Info': {
+        screen: InvoiceInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'pendingReview/OrderChange/Info': {
+        screen: OrderChangeInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyQuote': {
+        screen: MyQuote,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyQuote/Info': {
+        screen: MyQuoteInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentQuota': {
+        screen: DepartmentQuota,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentQuota/Info': {
+        screen: DepartmentQuotaInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyOrder': {
+        screen: MyOrder,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyOrder/Info': {
+        screen: MyOrderInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentOrder': {
+        screen: DepartmentOrder,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentOrder/Info': {
+        screen: DepartmentOrderInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyContractApproval': {
+        screen: MyContractApproval,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyContractApproval/Info': {
+        screen: MyContractApprovalInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentContractApproval': {
+        screen: DepartmentContractApproval,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentContractApproval/Info': {
+        screen: DepartmentContractApprovalInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyChangeOrder': {
+        screen: MyChangeOrder,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyChangeOrder/Info': {
+        screen: MyChangeOrderInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentChangeOrder': {
+        screen: DepartmentChangeOrder,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentChangeOrder/Info': {
+        screen: DepartmentChangeOrderInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyInvoice': {
+        screen: MyInvoice,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/MyInvoice/Info': {
+        screen: MyInvoiceInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentInvoice': {
+        screen: DepartmentInvoice,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+    'orderQuote/DepartmentInvoice/Info': {
+        screen: DepartmentInvoiceInfo,
+        navigationOptions: {
+            gesturesEnabled: true,
+        }
+    },
+};
+
+export default StackRouteConfigs;

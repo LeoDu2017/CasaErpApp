@@ -1,0 +1,62 @@
+import React from 'react';
+import {
+    Text,
+    View,
+    ScrollView
+} from 'react-native';
+
+import style from './style';
+
+
+class OrderScreen extends React.Component {
+  render() {
+        return (
+            <ScrollView>
+                <View style={{ backgroundColor: '#ffffff' }}>
+                    <View style={[style.title, style.structure]}>
+                        <View style={style.lightBox}></View>
+                        <View>
+                            <Text style={style.titleText}>订单信息</Text>
+                        </View>
+                    </View>
+                    <View style={[style.infoBox, style.structure]}>
+                        <View style={style.infoLine}>
+                            <Text style={style.infoKey}>市场价格</Text>
+                            <Text style={style.infoValue}>￥123456</Text>
+                        </View>
+                        <View style={style.infoLine}>
+                            <Text style={style.infoKey}>合同价格</Text>
+                            <Text style={style.infoValue}>￥123456</Text>
+                        </View>
+                        <View style={style.infoLine}>
+                            <Text style={style.infoKey}>折扣系数</Text>
+                            <Text style={style.infoValue}>0.4</Text>
+                        </View>
+                        <View style={style.infoLine}>
+                            <Text style={style.infoKey}>佣金</Text>
+                            <Text style={style.infoValue}>￥4545</Text>
+                        </View>
+                        <View style={style.infoLine}>
+                            <Text style={style.infoKey}>运费</Text>
+                            <Text style={style.infoValue}>￥789</Text>
+                        </View>
+                        <View style={style.infoLine}>
+                            <Text style={style.infoKey}>相关品牌</Text>
+                            <Text style={style.infoValue}>adds</Text>
+                        </View>
+                        <View style={style.infoLine}>
+                            <Text style={style.infoKey}>订单期货</Text>
+                            <Text style={style.infoValue}>3个月</Text>
+                        </View>
+                        <View style={style.infoLine}>
+                            <Text style={style.infoKey}>违约责任</Text>
+                            <Text style={style.infoValue}>0.4</Text>
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
+        );
+    }
+}
+
+export default OrderScreen;

@@ -1,0 +1,14 @@
+const dafaultData ={
+    name: '游客'
+}
+
+const login = (state = dafaultData, action) => {
+    switch(action.type) {
+        case 'SAVE_USERDATA_LOGIN':
+            return [...state, ...action];
+        default:
+            return state;
+    }
+}
+
+export default login;

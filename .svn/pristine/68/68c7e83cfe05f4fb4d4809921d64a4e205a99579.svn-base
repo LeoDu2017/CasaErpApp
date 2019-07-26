@@ -1,0 +1,286 @@
+import React, {Component} from 'react';
+import {
+    StyleSheet,
+    Dimensions,
+    Text,
+    TextInput,
+    View,
+    Image,
+    TouchableOpacity
+} from 'react-native';
+
+import ModalComponent from '../../../common/Modal';
+import pxToDp from '../../../../utils/aoto';
+
+
+class DepartmentInvoiceInfo extends Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            _id: this.props.navigation.state.params.id,
+            modalVisible: false,
+            modalTitle: '',
+            modalBody: ''
+        }
+
+        this.showModal = this.showModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    static navigationOptions = {
+        title: '发货单详情',
+        headerRight: <View/>,
+        headerStyle: {
+            backgroundColor: '#ffffff',
+        },
+        headerTintColor: '#333333',
+        headerTitleStyle: {
+            flex: 1,
+            textAlign: 'center'
+        }
+    };
+
+    showModal(type) {
+        if (type === 'pl') {
+            const modalBody = <TextInput
+                                    style={{ width: pxToDp(400), fontSize: 14, color: '#333333', backgroundColor: '#eef0f2', borderRadius: 3 }}
+                                    clearTextOnFocus={true}
+                                    multiline={true}
+                                    placeholder='请输入评论'
+                                    textAlignVertical='top'
+                                    numberOfLines={3}
+                                />
+            this.setState({ modalTitle: '添加评论', modalBody, modalVisible: true })
+        } else {
+            const modalBody = <View>
+                                <TextInput
+                                    style={{ width: pxToDp(400), fontSize: 14, color: '#333333', backgroundColor: '#eef0f2', borderRadius: 3 }}
+                                    clearTextOnFocus={true}
+                                    multiline={true}
+                                    placeholder='请输入评论'
+                                    textAlignVertical='top'
+                                    numberOfLines={3}
+                                />
+                                <TouchableOpacity
+                                    style={{ height: 30, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#eef0f2', borderRadius: 3, paddingHorizontal: 10, marginTop: 10 }}
+                                >
+                                    <Text style={{ fontSize: 13, color: '#999999' }}>请选择发货时间</Text>
+                                    <Text style={{ color: '#666666' }}>▼</Text>
+                                </TouchableOpacity>
+                              </View>
+            this.setState({ modalTitle: '审批通过', modalBody, modalVisible: true })
+        }
+    }
+
+    closeModal() {
+        this.setState({ modalVisible: false });
+    }
+
+    render() {
+        return (
+            <View>
+                <View style={[style.itemPosition, style.itemInfo]}>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>合同编号</Text>
+                        <Text style={style.itemText}>123456</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>配送地址</Text>
+                        <Text style={style.itemText}>杭州市西湖区</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>联系人</Text>
+                        <Text style={style.itemText}>意大利之家</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>联系方式</Text>
+                        <Text style={style.itemText}>18888888888</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>配送时间</Text>
+                        <Text style={style.itemText}>2019-01-09 01:09</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>提交人</Text>
+                        <Text style={style.itemText}>哈哈哈</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>提交时间</Text>
+                        <Text style={style.itemText}>2019-01-09 01:09</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>备注</Text>
+                        <Text style={style.itemText}>这里是备注</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>尾款金额</Text>
+                        <Text style={style.itemText}>￥ 123151</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>状态备注</Text>
+                        <Text style={style.itemText}>这里是状态备注</Text>
+                    </View>
+                    <View style={[style.itemList]}>
+                        <Text style={style.itemText}>状态</Text>
+                        <Text style={style.itemText}>待审核</Text>
+                    </View>
+                </View>
+                <View style={style.tab}>
+                    <View style={{ backgroundColor: '#ffffff' }}>
+                        <View style={[style.projectTitle, style.structure]}>
+                            <View style={style.lightBox}></View>
+                            <View>
+                                <Text style={style.titleText}>产品信息</Text>
+                            </View>
+                        </View>
+                        <View style={style.structure}>
+                            <View>
+                                <View style={style.projectInfo}>
+                                    <Image resizeMode='cover' style={{ width: 104, height: 69 }} source={require('../../../../../public/img/info/pic.png')}/>
+                                    <View style={{ marginLeft: 15 }}>
+                                        <View style={style.projectInfoLine}>
+                                            <Text style={style.projectTextKey}>产品编号：</Text>
+                                            <Text style={style.projectTextValue}>123456</Text>
+                                        </View>
+                                        <View style={style.projectInfoLine}>
+                                            <Text style={style.projectTextKey}>产品名称：</Text>
+                                            <Text style={style.projectTextValue}>简约现代主义真皮沙发</Text>
+                                        </View>
+                                        <View style={style.projectInfoLine}>
+                                            <Text style={style.projectTextKey}>产品品牌：</Text>
+                                            <Text style={style.projectTextValue}>PPPPPLLLLLL</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={[style.infoLine_between, { height: 42 }]}>
+                                    <Text style={style.projectTextKey}>属性规格</Text>
+                                    <Image style={style.translate} source={require('../../../../../public/img/info/arrow_down.png')} />
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+                <View style={[style.buttonBox, style.buttonStructure]}>
+                    <TouchableOpacity style={[style.button]} onPress={() => this.showModal('pl')}>
+                        <Text style={[style.buttonText]}>评论</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[style.button]}>
+                        <Text style={[style.buttonText]}>退回</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[style.button, { borderColor: '#3496FB', backgroundColor: '#3496FB' }]} onPress={() => this.showModal('tg')}>
+                        <Text style={[style.buttonText, { color: '#ffffff' }]}>通过</Text>
+                    </TouchableOpacity>
+                </View>
+                <ModalComponent
+                    modalVisible={this.state.modalVisible}
+                    closeModal={this.closeModal}
+                    modalTitle={this.state.modalTitle}
+                    modalBody={this.state.modalBody}
+                />
+            </View>
+        );
+    }
+}
+
+const { width, height } = Dimensions.get('window');
+const TabNavigationHight = height - 30 * 11 - 20 - 50 - 50 - 40;
+let style = StyleSheet.create({
+    structure: {
+        width: (width - 30),
+        marginLeft: 15,
+    },
+    buttonStructure: {
+        width: width,
+        paddingRight: 15,
+    },
+    itemPosition: {
+        paddingHorizontal: pxToDp(20),
+        marginVertical: 10,
+        backgroundColor: '#ffffff'
+    },
+    itemList: {
+        height: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    itemInfo: {
+        paddingVertical: 7
+    },
+    itemText: {
+        fontSize: 14,
+        color: '#333333'
+    },
+    tab: {
+        width,
+        height: TabNavigationHight,
+    },
+    buttonBox: {
+        width,
+        height: 50,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        backgroundColor: '#ffffff',
+        borderColor: '#E6E6E6',
+        borderTopWidth: 1
+    },
+    button: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 90,
+        height: 30,
+        borderWidth: 1,
+        borderRadius: 3,
+        marginLeft: 20,
+        borderColor: '#999999',
+    },
+    buttonText: {
+        fontSize: 14,
+        color: '#333333',
+    },
+    lightBox: {
+        width: 3,
+        height: 14,
+        backgroundColor: '#3496FB',
+        marginRight: 9,
+        marginTop: 2
+    },
+    titleText: {
+        fontSize: 14,
+        color: '#333333',
+        fontWeight: '200',
+    },
+    infoLine_between: {
+        flexDirection: 'row',
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    projectTitle: {
+        flexDirection: 'row',
+        height: 50,
+        alignItems: 'center',
+    },
+    projectInfo: {
+        flexDirection: 'row'
+    },
+    projectInfoLine: {
+        flexDirection: 'row',
+        height: 25,
+        alignItems: 'center',
+    },
+    projectTextKey: {
+        color: '#999999'
+    },
+    projectTextValue: {
+        color: '#333333'
+    }, 
+    translate: {
+
+    }
+});
+
+export default DepartmentInvoiceInfo;

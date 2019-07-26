@@ -1,0 +1,50 @@
+import {Dimensions} from 'react-native';
+import React,{Component} from 'react';
+import { StyleSheet, Image, TouchableOpacity} from 'react-native';
+const styles = StyleSheet.create({
+    image: {
+        left: 12,
+        height: 18,
+        width: 12,
+    },
+});
+// 58 app 只有竖屏模式，所以可以只获取一次 width
+const deviceWidthDp = Dimensions.get('window').width;
+// UI 默认给图是 640
+const uiWidthPx = 640;
+
+export function pxToDp(uiElementPx) {
+    return uiElementPx *  deviceWidthDp / uiWidthPx;
+}
+export function createReducer(initialState, handlers) {
+    return function reducer(state = initialState,action) {
+        if (handlers.hasOwnProperty(action.type)){
+            console.log('****************************');
+            return handlers[action.type](state,action)
+        }else{
+            console.log('==============================');
+            return state
+        }
+    }
+}
+
+export  class NavigationCustomBackMenu extends Component {
+    constructor(props){
+        super(props)
+    };
+    render() {
+        return (
+            <TouchableOpacity
+                onPress={()=>{
+                    this.props.nav.goBack()
+                }}
+            >
+                <Image style={styles.image}
+                       resizeMode='stretch'
+                       source={require('./assets/images/navigation/back.png')} >
+                </Image>
+            </TouchableOpacity>
+        );
+    }
+}
+

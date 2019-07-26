@@ -1,0 +1,41 @@
+import React, { Component } from 'react';
+import { View, Text, Button, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+
+import ShowMenu from './loadMenu'
+
+
+class Home extends Component {
+    static navigationOptions = {
+        title: '北京恒邦信大国际贸易有限公司',
+        headerLeft: null,
+        headerStyle: {
+            backgroundColor: '#ffffff',
+        },
+        headerTintColor: '#333333',
+        headerTitleStyle: {
+            flex: 1,
+            textAlign: 'center'
+        }
+    };
+
+    render() {
+        return (
+            <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
+                <View>
+                    <Image resizeMode={'cover'} style={style.header_top_wrap_img} source={require('../../../../../public/img/home/banner.png')} />
+                </View>
+                <ShowMenu navigation={this.props.navigation} />
+            </ScrollView>
+        )
+    }
+}
+
+const {width} = Dimensions.get('window');
+let style = StyleSheet.create({
+    header_top_wrap_img: {
+        width: width,
+    }
+});
+
+export default Home;

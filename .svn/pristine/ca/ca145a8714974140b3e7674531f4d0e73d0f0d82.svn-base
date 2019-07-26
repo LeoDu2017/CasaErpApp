@@ -1,0 +1,101 @@
+import {
+    StyleSheet,
+    Dimensions,
+    Text,
+    View,
+    Image,
+    ScrollView
+} from 'react-native';
+
+
+const { width, height } = Dimensions.get('window');
+
+const style = StyleSheet.create({
+    structure: {
+        width: (width - 30),
+        marginLeft: 15,
+    },
+    title: {
+        flexDirection: 'row',
+        height: 50,
+        alignItems: 'center',
+        borderColor: '#eeeeee',
+        borderBottomWidth: 1,
+        borderStyle: 'dashed'
+    },
+    lightBox: {
+        width: 3,
+        height: 14,
+        backgroundColor: '#3496FB',
+        marginRight: 9,
+        marginTop: 2
+    },
+    titleText: {
+        fontSize: 14,
+        color: '#333333',
+        fontWeight: '200',
+    },
+    infoTable: {
+        borderWidth: 1,
+        borderColor: '#e6e6e6',
+        marginBottom: 10
+    },
+    infoTableLine: {
+        flexDirection: 'row',
+    },
+    infoTableItem: {
+        width: (width - 30) / 3,
+        height: 30,
+        lineHeight: 30,
+        fontSize: 14,
+        color: '#666666',
+        textAlign: 'center',
+        borderRightWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: '#e6e6e6',
+    },
+    infoLine: {
+        flexDirection: 'row',
+        height: 40,
+        alignItems: 'center',
+        borderColor: '#eeeeee',
+        borderBottomWidth: 1,
+        borderStyle: 'dashed'
+    },
+    infoLine_between: {
+        flexDirection: 'row',
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    infoKey: {
+        width: 80,
+        fontSize: 14,
+        color: '#999999'
+    },
+    infoValue: {
+        fontSize: 14,
+        color: '#333333'
+    },
+    projectTitle: {
+        flexDirection: 'row',
+        height: 50,
+        alignItems: 'center',
+    },
+    projectInfo: {
+        flexDirection: 'row'
+    },
+    projectInfoLine: {
+        flexDirection: 'row',
+        height: 25,
+        alignItems: 'center',
+    },
+    projectTextKey: {
+        color: '#999999'
+    },
+    projectTextValue: {
+        color: '#333333'
+    }
+});
+
+export default style;

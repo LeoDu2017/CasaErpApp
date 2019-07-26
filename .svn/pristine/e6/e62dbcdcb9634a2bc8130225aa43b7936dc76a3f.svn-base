@@ -1,0 +1,47 @@
+import {LOADING_QUOTATION,LOADING_ERROR,LOADING_SUCCESS} from "./_actionTypes";
+
+
+// 模拟综合系统信息
+
+const quotation = {
+    today: 12354,
+    this_month: 24880.00,
+    all_mouths: 28658288.00,
+    year_comparison: {
+        '2016':6816239.00,
+        '2017':13358979.00,
+        '2018':25710094.00,
+        '2019':28450107.00,
+    }
+};
+
+const load = () => {
+    return (dispatch) => {
+        dispatch(doing());
+        let result = fetch('https://www.baidu.com/')
+            .then((res) => {
+                dispatch(success(true, quotation)); // 登录请求完成
+            }).catch((e) => {
+                dispatch(error(false)); // 登录请求出错
+            })
+    }
+};
+function doing(){
+    return {
+        type : LOADING_QUOTATION
+    }
+}
+function success(quotation){
+    return {
+        type : LOADING_SUCCESS,
+        quotation
+    }
+}
+function error(){
+    return {
+        type : LOADING_ERROR
+    }
+}
+export default{
+    load
+}

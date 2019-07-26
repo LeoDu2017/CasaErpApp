@@ -1,0 +1,52 @@
+import React from 'react';
+import {
+    Text,
+    View,
+    Image,
+    ScrollView
+} from 'react-native';
+
+import style from './style';
+
+
+class ProjectScreen extends React.Component {
+    render() {
+        return (
+            <View style={{ backgroundColor: '#ffffff' }}>
+                <View style={[style.projectTitle, style.structure]}>
+                    <View style={style.lightBox}></View>
+                    <View>
+                        <Text style={style.titleText}>产品信息</Text>
+                    </View>
+                </View>
+                <View style={style.structure}>
+                    <View>
+                        <View style={style.projectInfo}>
+                            <Image resizeMode='cover' style={{ width: 104, height: 69 }} source={require('../../../../../../public/img/info/pic.png')}/>
+                            <View style={{ marginLeft: 15 }}>
+                                <View style={style.projectInfoLine}>
+                                    <Text style={style.projectTextKey}>产品编号：</Text>
+                                    <Text style={style.projectTextValue}>123456</Text>
+                                </View>
+                                <View style={style.projectInfoLine}>
+                                    <Text style={style.projectTextKey}>产品名称：</Text>
+                                    <Text style={style.projectTextValue}>简约现代主义真皮沙发</Text>
+                                </View>
+                                <View style={style.projectInfoLine}>
+                                    <Text style={style.projectTextKey}>产品品牌：</Text>
+                                    <Text style={style.projectTextValue}>PPPPPLLLLLL</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={[style.infoLine_between, { height: 42 }]}>
+                            <Text style={style.projectTextKey}>属性规格</Text>
+                            <Image source={require('../../../../../../public/img/info/arrow_down.png')} />
+                        </View>
+                    </View>
+                </View>
+            </View>
+        );
+    }
+}
+
+export default ProjectScreen;

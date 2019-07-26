@@ -1,0 +1,13 @@
+import { takeEvery } from 'redux-saga';
+import actionType from '../constants/actionType';
+
+
+function* login(action) {
+    console.log(action);
+}
+
+function* rootSaga() {
+    // yield takeEvery(actionType.SAVE_USERDATA_LOGIN, login);
+}
+
+export default rootSaga;

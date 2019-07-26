@@ -1,0 +1,10 @@
+import login from './login';
+import home from './home';
+
+
+const action = {
+    login,
+    home
+}
+  
+export default action

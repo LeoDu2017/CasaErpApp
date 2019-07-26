@@ -1,0 +1,37 @@
+/**
+ * Created by Leo on 2019/7/22 0012
+ */
+
+import React,{Component} from 'react';
+import {
+    View,
+    Text,
+    Image,
+    ScrollView, StatusBar,
+} from 'react-native';
+
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import styles from './_styles'
+import actions from './_actions'
+
+class Screen extends Component{
+    constructor(props){
+        super(props)
+    };
+    componentDidMount(): void {
+    };
+    render(){
+        return (
+            <View>
+                <Text>
+                    综合统计
+                </Text>
+            </View>
+        );
+    }
+}
+
+export default connect(
+    ({CAchievement})=>({CAchievement})
+)(Screen)

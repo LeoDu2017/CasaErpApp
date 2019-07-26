@@ -1,0 +1,44 @@
+import React from 'react';
+import {
+    Text,
+    View,
+    ScrollView
+} from 'react-native';
+
+import style from './style';
+
+
+class ClientScreen extends React.Component {
+    render() {
+        return (
+            <View style={{ backgroundColor: '#ffffff' }}>
+                <View style={[style.title, style.structure]}>
+                    <View style={style.lightBox}></View>
+                    <View>
+                        <Text style={style.titleText}>客户信息</Text>
+                    </View>
+                </View>
+                <View style={[style.infoBox, style.structure]}>
+                    <View style={style.infoLine}>
+                        <Text style={style.infoKey}>客户姓名</Text>
+                        <Text style={style.infoValue}>木子李</Text>
+                    </View>
+                    <View style={style.infoLine}>
+                        <Text style={style.infoKey}>客户来源</Text>
+                        <Text style={style.infoValue}>转介绍</Text>
+                    </View>
+                    <View style={style.infoLine}>
+                        <Text style={style.infoKey}>联系方式</Text>
+                        <Text style={style.infoValue}>18888888888</Text>
+                    </View>
+                    <View style={style.infoLine}>
+                        <Text style={style.infoKey}>客户性质</Text>
+                        <Text style={style.infoValue}>VVVVVIP</Text>
+                    </View>
+                </View>
+            </View>
+        );
+    }
+}
+
+export default ClientScreen;

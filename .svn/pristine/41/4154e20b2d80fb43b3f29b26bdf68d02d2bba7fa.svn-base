@@ -1,0 +1,32 @@
+'use strict';
+import {LOADING_QUOTATION,LOADING_ERROR,LOADING_SUCCESS} from "./_actionTypes";
+import {createReducer} from '../../../_Util';
+
+const initialState = {
+    status:'加载列表',
+    isSuccess:false,
+    quotation:null
+};
+const actionHandler = {
+    [LOADING_QUOTATION]:(state,action) =>{
+        return {
+            ...state,
+            status:'正在加载...',
+        }
+    },
+    [LOADING_SUCCESS]:(state,action) => {
+        return {
+            ...state,
+            isSuccess: true,
+            quotation: action.quotation,
+        }
+    },
+    [LOADING_ERROR]:(state,action) => {
+        return {
+            ...state,
+            isSuccess: false,
+            status:'信息加载失败，请稍后重试...'
+        }
+    }
+};
+export default createReducer(initialState,actionHandler)

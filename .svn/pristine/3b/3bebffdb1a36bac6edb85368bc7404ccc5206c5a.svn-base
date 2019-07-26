@@ -1,0 +1,253 @@
+import {createAppContainer, createStackNavigator} from 'react-navigation';
+import React from 'react';
+import {Image, Platform, Text, TouchableOpacity, View} from "react-native"
+import {NavigationCustomBackMenu} from "./_Util";
+
+import LoginScreen from "./pages/Login";
+import MainScreen from './_Tabbar';
+import {ModifyPasswordScreen, ModifyPhoneScreen} from './pages/Ucenter'
+import {MAftersale, DAftersale, ADtails} from './pages/Aftersale'
+import ModalDropdown from './component/ModalDropdown';
+import {
+    MyDayReport,
+    MyDayReportNew,
+    MyDayReportDetail,
+    DeDayReport,
+    MyWeekReport,
+    MyWeekReportDetail,
+    DeWeekReport
+} from './pages/Report'
+import {COAchievementScreen, CUAchievementScreen, QUAchievementScreen} from './pages/Achievement'
+
+const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
+const customNavigationOptions = (navigation, headerRight) => ({
+    headerRight: (headerRight ? headerRight : <View/>),
+    headerTitleStyle: {
+        textAlign: 'center',
+        flex: 1,
+    },
+    headerTitleContainerStyle: {
+        left: TITLE_OFFSET,
+        right: TITLE_OFFSET,
+    },
+    headerTintColor: '#333333',
+    // headerBackImage: require('./assets/images/navigation/back.png'),
+    headerLeft: <NavigationCustomBackMenu nav={navigation}/>,
+});
+
+const StackRouteConfigs = {
+    'AchievementSystem/Comprehensive': {
+        screen: COAchievementScreen,
+        navigationOptions: ({navigation}) => ({
+            title: '综合统计',
+            ...customNavigationOptions(navigation,
+            <View style={{right:15}}>
+                <ModalDropdown
+                    defaultValue={'2019年'}
+                    textStyle={{color:'#fff',fontSize:16}}
+                    dropdownTextStyle={{
+                        width:120,
+                        fontSize:16,
+                        borderBottomWidth: 1,
+                        borderColor: '#eee',
+                        textAlign: 'center'}}
+                    options={[
+                        '2019年',
+                        '2018年',
+                        '2017年',
+                        '2016年',
+                    ]}
+                    onSelect = {(data) => {console.log('data:',data)}}
+                />
+            </View>),
+            headerTransparent: 'true',
+            headerTintColor: '#fff',
+            headerStyle :{ marginTop: 20 },
+
+        })
+    },
+    LoginScreen: {screen: LoginScreen},
+    'AftersaleSystem/My': {
+        screen: MAftersale,
+        navigationOptions: ({navigation}) => ({
+            title: '我的售后单',
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => alert('filter')}>
+                        <Image style={{height: 20, width: 20}}
+                               source={require('./assets/images/navigation/nav_select.png')}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => alert('search')}>
+                        <Image style={{height: 20, width: 20}}
+                               source={require('./assets/images/navigation/nav_search.png')}/>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    },
+    'AftersaleSystem/Details': {
+        screen: ADtails,
+        navigationOptions: ({navigation}) => ({
+            title: '售后单批复详情',
+            ...customNavigationOptions(navigation)
+        })
+    },
+    'AftersaleSystem/Department': {
+        screen: DAftersale,
+        navigationOptions: ({navigation}) => ({
+            title: '部门售后单',
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => alert('filter')}>
+                        <Image style={{height: 20, width: 20}}
+                               source={require('./assets/images/navigation/nav_select.png')}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => alert('search')}>
+                        <Image style={{height: 20, width: 20}}
+                               source={require('./assets/images/navigation/nav_search.png')}/>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    },
+    'Ucenter/ModifyPassword': {
+        screen: ModifyPasswordScreen,
+        navigationOptions: ({navigation}) => ({
+            title: '修改密码',
+            ...customNavigationOptions(navigation)
+        })
+    },
+    'Ucenter/ModifyPhone': {
+        screen: ModifyPhoneScreen,
+        navigationOptions: ({navigation}) => ({
+            title: '修改手机号',
+            ...customNavigationOptions(navigation)
+        })
+    },
+    'ReportSystem/Day/MyReport': {
+        screen: MyDayReport,
+        navigationOptions: ({navigation}) => ({
+            title: ' 我的日报',
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => navigation.push('ReportSystem/Day/New/MyReport', {id: 0})}>
+                        <Image style={{height: 20, width: 20}} source={require('./assets/images/report/new.png')}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => alert('filter')}>
+                        <Image style={{height: 20, width: 20}}
+                               source={require('./assets/images/report/nav_select.png')}/>
+                    </TouchableOpacity>
+                </View>)
+        })
+    },
+    'ReportSystem/Day/DeReport': {
+        screen: DeDayReport,
+        navigationOptions: ({navigation}) => ({
+            title: ' 部门日报',
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => alert('filter')}>
+                        <Image style={{height: 20, width: 20}}
+                               source={require('./assets/images/report/nav_select.png')}/>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    },
+    'ReportSystem/Day/MyReportDetail': {
+        screen: MyDayReportDetail,
+        navigationOptions: ({navigation}) => ({
+            title: navigation.state.params.id ? '日报详情' : '添加日报',
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => navigation.state.params.navigatePress()}>
+                        <Text>{navigation.state.params.edit ? '完成' : '编辑'}</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    },
+    'ReportSystem/Day/New/MyReport': {
+        screen: MyDayReportNew,
+        navigationOptions: ({navigation}) => ({
+            title: '添加日报',
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => navigation.state.params.navigatePress()}>
+                        <Text>完成</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    },
+    'ReportSystem/Week/MyReport': {
+        screen: MyWeekReport,
+        navigationOptions: ({navigation}) => ({
+            title: '我的周报',
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ReportSystem/Week/MyReportDetail', {id: 0})}>
+                        <Image style={{height: 20, width: 20}} source={require('./assets/images/report/new.png')}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => alert('filter')}>
+                        <Image style={{height: 20, width: 20}}
+                               source={require('./assets/images/report/nav_select.png')}/>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    },
+    'ReportSystem/Week/MyReportDetail': {
+        screen: MyWeekReportDetail,
+        navigationOptions: ({navigation}) => ({
+            title: navigation.state.params.id ? '周报详情' : '添加周报',
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => navigation.state.params.navigatePress()}>
+                        <Text>{navigation.state.params.edit ? '完成' : '编辑'}</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        })
+    },
+    'ReportSystem/Week/DeReport': {
+        screen: DeWeekReport,
+        navigationOptions: ({navigation}) => ({
+            title: '部门周报',
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => alert('filter')}>
+                        <Image style={{height: 20, width: 20}}
+                               source={require('./assets/images/report/nav_select.png')}/>
+                    </TouchableOpacity>
+                </View>)
+        })
+
+    },
+
+    'AchievementSystem/Customer': {
+        screen: CUAchievementScreen
+    },
+
+    'AchievementSystem/Quotation': {
+        screen: QUAchievementScreen
+    },
+    MainScreen: {screen: MainScreen}
+};
+
+const StackNavigatorConfigs = {
+    // 初始化哪个界面为根界面
+    initialRouteName: 'LoginScreen',
+    // initialRouteName: 'AchievementSystem/Comprehensive',
+    // 跳转方式：默认的card，在iOS上是从右到左跳转，在Android上是从下到上，都是使用原生系统的默认跳转方式。
+    mode: 'card',
+    // 导航条动画效果：float表示会渐变，类似于iOS的原生效果，screen表示没有渐变。none表示隐藏导航条
+    headerMode: 'screen',
+    navigationOptions: {
+        gesturesEnabled: false,
+    }
+};
+const AppNavigator = createStackNavigator(StackRouteConfigs, StackNavigatorConfigs);//删除每个页面的头（一般使用自定义的）
+
+export default createAppContainer(AppNavigator);
+

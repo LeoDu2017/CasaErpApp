@@ -1,0 +1,9 @@
+import actionType from '../../constants/actionType';
+
+
+export const  showUserData = name => {
+    return {
+        type: actionType.SHOW_USER_HOME,
+        name
+    }
+}

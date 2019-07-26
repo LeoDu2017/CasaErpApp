@@ -1,0 +1,129 @@
+import React, {Component} from 'react';
+import {
+    StyleSheet,
+    FlatList,
+    View,
+    Text,
+    TouchableOpacity,
+    Dimensions,
+} from 'react-native';
+
+import pxToDp from '../../utils/aoto';
+
+
+class ShowList extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    _keyExtractor = (item, index) => item.id;
+
+    _renderItem = ({item}) => {
+        const infoSet = this.props.infoSet || {};
+        const buttonSet = this.props.buttonSet || [];
+        const { navigate } = this.props.navigation;
+        const navigationName = this.props.navigationName;
+        return (
+            <View style={style.listBox}>
+                <TouchableOpacity onPress={() => {navigate(navigationName, { id: item.id })}}>
+                    <View style={[style.itemList, style.listTitle, style.itemPosition]}>
+                        <Text style={style.listTitle_left}>{item.contractId}</Text>
+                        <Text style={style.listTitle_Right}>{item.contractState}</Text>
+                    </View>
+                </TouchableOpacity>
+                <View style={[style.itemPosition, style.itemInfo]}>
+                    {
+                        Object.entries(infoSet).map(value => {
+                            return (
+                                <View style={[style.itemList, style.itemMargin]}>
+                                    <Text style={{ color: '#333333', fontSize: 14 }}>{value[1]}</Text>
+                                    <Text style={{ color: '#333333', fontSize: 14 }}>{item[value[0]]}</Text>
+                                </View>
+                            );
+                        })
+                    }
+                </View>
+                <View style={[style.itemPosition, style.buttonBox]}>
+                    {
+                        buttonSet.map(value => {
+                           return (
+                            <TouchableOpacity key={value.text} style={[style.button, { ...value.buttonStyle }]} onPress={() => value.useModal ? this.props.showModal(value): ''}>
+                                <Text style={[style.buttonText, { ...value.textStyle }]}>{value.text}</Text>
+                            </TouchableOpacity>
+                           );
+                        })
+                    }
+                </View>
+            </View>
+        )
+    };
+
+    render() {
+        return (
+            <FlatList
+                data={this.props.data}
+                keyExtractor={this._keyExtractor}
+                renderItem={(data) => this._renderItem(data)}
+            />
+        );
+    }
+}
+
+const {width, height} = Dimensions.get('window');
+let style = StyleSheet.create({
+    listBox: {
+        marginTop: 10,
+        backgroundColor: '#ffffff',
+    },
+    listTitle: {
+        paddingVertical: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: '#e6e6e6'
+    },
+    listTitle_left: {
+        fontSize: 14,
+        color: '#999999'
+    },
+    listTitle_Right: {
+        fontSize: 14,
+        color: '#3595fb'
+    },
+    itemPosition: {
+        width: (width - pxToDp(40)),
+        marginLeft: pxToDp(20),
+    },
+    itemList: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    itemMargin: {
+        marginVertical: 4
+    },
+    itemInfo: {
+        paddingVertical: 7,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eeeeee'
+    },
+    buttonBox: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+    }, 
+    button: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        width: 90,
+        height: 30,
+        borderWidth: 1,
+        borderRadius: 5,
+        marginLeft: 10,
+        marginVertical: 10,
+        borderColor: '#b5b5b5',
+    },
+    buttonText: {
+        fontSize: 13,
+        textAlign: 'center',
+    }
+});
+
+export default ShowList;

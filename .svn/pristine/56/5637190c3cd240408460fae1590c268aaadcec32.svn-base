@@ -1,0 +1,8 @@
+const Development = false;
+const server = Development ?'http://app.casaerp.cn':'https://app.casaerp.com';
+
+const API = {
+    Login: `${server}/Login/login`,
+};
+
+export default API

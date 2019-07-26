@@ -1,0 +1,31 @@
+import React, { Component } from 'react';
+import { View, Text, Button, Image, StyleSheet, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+
+
+class Message extends Component {
+    static navigationOptions = {
+        title: '北京恒邦信大国际贸易有限公司',
+        headerLeft: null,
+        headerStyle: {
+            backgroundColor: '#ffffff',
+        },
+        headerTintColor: '#333333',
+        headerTitleStyle: {
+            flex: 1,
+            textAlign: 'center'
+        }
+    };
+
+    render() {
+        return (
+            <View style={{flex: 1, backgroundColor: '#fff'}}>
+                <View>
+                    <Text>这里是message页面</Text>
+                </View>
+            </View>
+        )
+    }
+}
+
+export default Message;

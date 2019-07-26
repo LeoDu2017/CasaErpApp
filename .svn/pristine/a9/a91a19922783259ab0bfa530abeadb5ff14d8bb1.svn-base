@@ -1,0 +1,143 @@
+import React from 'react'
+import {createBottomTabNavigator} from "react-navigation";
+import HomeScreen from "./pages/Home";
+import MessageScreen from "./pages/Message";
+import {MainScreen as UcenterScreen} from "./pages/Ucenter";
+import {Text, Image, Platform, StyleSheet} from "react-native";
+
+const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
+const TabNavigator = createBottomTabNavigator({
+    Message: {
+        headerMode: 'screen',
+        screen: MessageScreen,
+        mode: Platform.OS === 'ios' ? 'modal' : 'card',
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#6699ff',
+            },
+            headerTitle: '北京恒邦信大国际贸易有限公司',
+            headerTintColor: '#f5fcff',
+            headerTitleStyle: {
+                fontWeight: 'normal',
+            },
+            tabBarLabel: ({focused}) => {
+                if (!focused) {
+                    return <Text style={{textAlign: 'center', color: '#999'}}>消息</Text>
+                } else {
+                    return <Text style={{textAlign: 'center', color: '#3b99fb'}}>消息</Text>
+                }
+            },
+            tabBarIcon: ({tintColor, focused}) => {
+                return (
+                    <Image
+                        source={focused ?
+                            require('./assets/images/tab/Tab_message_pre.png') :
+                            require('./assets/images/tab/Tab_message.png')}
+                        style={styles.icon}
+                    />
+                )
+            },
+        },
+    },
+    Home: {
+        screen: HomeScreen,
+        headerMode: 'screen',
+        mode: Platform.OS === 'ios' ? 'modal' : 'card',
+        navigationOptions: {
+            tabBarLabel: ({focused}) => {
+                if (!focused) {
+                    return <Text style={{textAlign: 'center', color: '#999'}}>ERP</Text>
+                }
+            },
+            tabBarIcon: ({tintColor, focused}) => {
+                return (
+                    <Image
+                        source={focused ?
+                            require('./assets/images/tab/Tab_erp_pre.png') :
+                            require('./assets/images/tab/Tab_erp.png')}
+                        style={focused ? styles.current : styles.icon}
+                    />
+                )
+            }
+        }
+    },
+    Ucenter: {
+        screen: UcenterScreen,
+        navigationOptions: {
+            tabBarLabel: ({focused}) => {
+                if (!focused) {
+                    return <Text style={{textAlign: 'center', color: '#999'}}>我的</Text>
+                } else {
+                    return <Text style={{textAlign: 'center', color: '#3b99fb'}}>我的</Text>
+                }
+            },
+            tabBarIcon: ({tintColor, focused}) => {
+                return (
+                    <Image
+                        source={focused ?
+                            require('./assets/images/tab/Tab_person_press.png') :
+                            require('./assets/images/tab/Tab_por_pre.png')}
+                        style={styles.icon}
+                    />
+                )
+            },
+        }
+    },
+}, {
+    //进入App的首页面
+    initialRouteName: 'Home',
+    //对于导航的设置
+    tabBarOptions: {
+        indicatorStyle: {height: 0},
+        //文字的样式
+        labelStyle: {
+            fontSize: 14,
+            paddingBottom: 4,
+            color: '#999'
+        },
+        //对于导航的stytles
+        style: {
+            borderTopColor: '#E6E6E6',
+            borderTopWidth: 1,
+            height: 60,
+        }
+    }
+});
+TabNavigator.navigationOptions = ({navigation}) => {
+    const {routeName} = navigation.state.routes[navigation.state.index];
+    if (routeName === 'Ucenter') {
+        return {
+            headerTitle: '个人中心',
+            headerTransparent: 'true',
+            headerTitleStyle: {
+                textAlign: 'center',
+                flex: 1,
+            },
+            headerTitleContainerStyle: {
+                marginTop: 20,
+                left: TITLE_OFFSET,
+                right: TITLE_OFFSET,
+            },
+            headerTintColor: '#f5fcff',
+        }
+    } else {
+        return {
+            headerTitle: '北京恒邦信大国际贸易有限公司',
+        }
+    }
+
+};
+const styles = StyleSheet.create({
+    icon: {
+        marginTop: 5,
+        height: 20,
+        width: 20,
+    },
+    current: {
+        marginTop: 5,
+        height: 40,
+        width: 40,
+    }
+});
+
+export default TabNavigator

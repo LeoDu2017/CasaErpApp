@@ -1,0 +1,52 @@
+/**
+ * Created by Leo on 2019/7/22 0012
+ */
+
+import React,{Component} from 'react';
+import {
+    View,
+    Text,
+    Image,
+    ScrollView, StatusBar, ImageBackground,
+} from 'react-native';
+
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import styles from './_styles'
+import actions from './_actions'
+import loginAction from "../../Login/_actions";
+
+class Screen extends Component{
+    constructor(props){
+        super(props);
+        this._navListener = this.props.navigation.addListener('didFocus', () => {
+            StatusBar.setBackgroundColor('transparent');
+            StatusBar.setTranslucent(true);
+            StatusBar.setBarStyle('light-content');
+            //!IOS && StatusBar.setBackgroundColor('#6a51ae');
+        });
+    };
+    componentDidMount(): void {
+        const {init} = this.props;
+        init.load()
+    };
+    render(){
+        return (
+            <View style={styles.container}>
+                <ImageBackground
+                    resizeMode={'stretch'}
+                    style={styles.banner}
+                    source={require('../../../assets/images/achievement/banner.png')}>
+                </ImageBackground>
+            </View>
+        );
+    };
+    componentWillUnmount(): void {
+        this._navListener.remove();
+    };
+}
+
+export default connect(
+    ({CAchievement})=>({CAchievement}),
+    (dispatch) => ({init:bindActionCreators(actions, dispatch)})
+)(Screen)

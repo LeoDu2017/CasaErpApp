@@ -1,0 +1,40 @@
+import {LOADING_CUSTOMER,LOADING_ERROR,LOADING_SUCCESS} from "./_actionTypes";
+
+
+import {
+    Achievement_fetch_years,
+} from '../../../_Service'
+
+const fetch_years = (navigation) => {
+    return (dispatch) => {
+        dispatch(doing());
+        Achievement_fetch_years().then(({status,data,msg}) => {
+            if(status){
+                navigation.setParams({years:data})
+            }else{
+                alert(msg)
+            }
+        })
+
+    }
+};
+
+function doing(){
+    return {
+        type : LOADING_CUSTOMER
+    }
+}
+function success(customer){
+    return {
+        type : LOADING_SUCCESS,
+        customer
+    }
+}
+function error(){
+    return {
+        type : LOADING_ERROR
+    }
+}
+export default{
+    fetch_years
+}

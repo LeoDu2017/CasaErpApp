@@ -1,0 +1,10 @@
+const actionType = {
+    
+    // login_actions
+    SAVE_USERDATA_LOGIN: 'SAVE_USERDATA_LOGIN',
+
+    // home_action
+    SHOW_USER_HOME: 'SHOW_USER_HOME',
+}
+
+export default actionType;

@@ -1,0 +1,45 @@
+import React from 'react'
+import {View, Text, StyleSheet, TextInput} from 'react-native';
+export default ({edit,title,onChange,data,name}) =>
+    <View style={styles.report_data_item}>
+        <Text style={styles.report_data_text}>{title}</Text>
+        {edit ?
+            <TextInput
+                style={styles.input_data}
+                maxLength={5}
+                placeholder= {`请输入${title}`}
+                name={name}
+                key={name}
+                onChangeText={(value) => onChange({[name]:value})}
+                defaultValue= {data}/> :
+            <Text style={styles.report_data_text}>
+                {data}
+            </Text>
+        }
+    </View>;
+const styles = StyleSheet.create({
+    report_data_item:{
+        display: 'flex',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginBottom: 10,
+        alignItems: 'center',
+        height: 32,
+        lineHeight: 32,
+    },
+    input_data: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        fontSize: 14,
+        borderBottomWidth: 1,
+        borderColor: '#ccc',
+        maxWidth: 100,
+        height: 32,
+        lineHeight: 32,
+        padding: 0,
+        textAlign: 'right'
+    },
+    report_data_text:{
+        fontSize:16,
+    }
+});

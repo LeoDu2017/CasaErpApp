@@ -1,0 +1,94 @@
+import React, { Component } from 'react';
+import {
+    View,
+    Text,
+    Image,
+    Dimensions,
+    StyleSheet,
+    TouchableOpacity
+} from 'react-native';
+
+import list from './list';
+import pxToDp from '../../../../utils/aoto';
+
+
+class ShowMenu extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const { navigation } = this.props;
+        return (
+            <View>
+                {list.map(item => {
+                    return (
+                        <View key={item.name}>
+                            <View style={{ flex: 1, flexDirection: 'row', height: 50, alignItems: 'center' }}>
+                                <View style={style.lightBox}></View>
+                                <View style={style.title}>
+                                    <Text style={style.titleText}>{item.name}</Text>
+                                </View>
+                            </View>
+                            <View style={style.menuItems}>
+                                {item.value.map(value => {
+                                    return (
+                                        <TouchableOpacity key={value.name} activeOpacity={1} onPress={() => navigation.navigate(value.path)}>
+                                            <View style={style.item}>
+                                                <Image source={value.icon} />
+                                                <Text style={style.itemText}>{value.name}</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    )
+                                })}
+                            </View>
+                            <View style={style.interval}></View>
+                        </View>
+                    )
+                })}
+            </View>
+        )
+    }
+}
+
+const {width,height} = Dimensions.get('window');
+let style = StyleSheet.create({
+    title: {
+        // width: 100
+    },
+    titleText: {
+        fontSize: 16,
+        fontWeight: '200',
+    },
+    menuItems: {
+        width: width,
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    item: {
+        width: (width / 4),
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginBottom: 15,
+        backgroundColor:'transparent'
+    },
+    itemText: {
+        fontSize: 14,
+        marginTop: 10,
+    },
+    interval: {
+        height: 10,
+        backgroundColor: '#f2f2f2'
+    },
+    lightBox: {
+        width: 4,
+        height: 16,
+        backgroundColor: '#3595fb',
+        marginLeft: 20,
+        marginRight: 10,
+        marginTop: 2
+    }
+});
+
+export default ShowMenu;

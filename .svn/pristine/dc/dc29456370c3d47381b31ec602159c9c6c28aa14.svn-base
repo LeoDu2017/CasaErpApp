@@ -1,0 +1,90 @@
+import React, {Component,Fragment} from 'react';
+import {View, ScrollView, TouchableOpacity, Text} from 'react-native';
+import {connect} from 'react-redux'
+import ReportInput from '../../_Component_input'
+import ReportTexteara from '../../_Component_texteara'
+import styles from '../../_styles'
+import {bindActionCreators} from "redux";
+import Actions from "./_actions";
+import ReportLoading from '../../_Component_loding_status'
+import {customNavigationOptions} from "../../../../_Util";
+
+class Screen extends Component{
+    static  navigationOptions = ({navigation}) => ({
+        title: navigation.state.params.id ? '日报详情' : '添加日报',
+        ...customNavigationOptions(navigation,
+            <View style={{flexDirection: 'row'}}>
+                <TouchableOpacity onPress={() => navigation.state.params.navigatePress()}>
+                <Text>{navigation.state.params.edit ? '完成' : '编辑'}</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    });
+    constructor(props){
+        super(props);
+        const { params:{id} } = this.props.navigation.state;
+        this.state = {
+            id,
+            edit: !id
+        }
+    };
+    setEdit(){
+        const edit = !this.state.edit;
+        this.props.navigation.setParams({edit});
+        this.setState({edit});
+    };
+    componentDidMount(){
+        this.props.navigation.setParams({
+            edit: this.state.edit,
+            navigatePress: this.setEdit.bind(this)
+        });
+        const {detailAction}= this.props;
+        detailAction.fetch_report()
+    };
+    onChange(state){
+        this.setState(state)
+    };
+    render(){
+        const {MRDetails:{report,isSuccess,status}} = this.props;
+        return(
+            <Fragment>
+            {
+                isSuccess ?
+                    <ScrollView>
+                        <View style={styles.report_data}>
+                            {
+                                report.report_data.map(item=>
+                                    <ReportInput key={item.title}
+                                                 edit={this.state.edit}
+                                                 onChange={this.onChange}
+                                                 {...item}/>)
+                            }
+                        </View>
+                        <View style={styles.report_data}>
+                            <ReportTexteara
+                                edit={this.state.edit}
+                                data={report.report_demand}
+                                title='需上级解决问题'/>
+                        </View>
+                        <View style={styles.report_data}>
+                            <ReportTexteara
+                                edit={this.state.edit}
+                                data={report.report_work_content}
+                                title='工作内容'/>
+                        </View>
+                    </ScrollView> :
+                    <ReportLoading>{status}</ReportLoading>
+            }
+            </Fragment>
+        )
+    }
+}
+
+export default connect(
+    ({MRDetails}) => ({
+        MRDetails
+    }),
+    (dispatch) => ({
+        detailAction: bindActionCreators(Actions, dispatch)
+    })
+)(Screen)

@@ -1,0 +1,30 @@
+import React,{Component} from 'react';
+import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
+
+export default class NavigationCustomBackMenu extends Component {
+    constructor(props){
+        super(props)
+    };
+    render() {
+        return (
+            <TouchableOpacity
+                onPress={()=>{
+                    this.props.nav.goBack()
+                }}
+            >
+                <Image style={styles.image}
+                       resizeMode='stretch'
+                       source={require('../../../public/img/navigation/back.png')} >
+                </Image>
+            </TouchableOpacity>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    image: {
+        left: 12,
+        height: 18,
+        width: 12,
+    },
+});

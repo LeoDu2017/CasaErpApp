@@ -1,0 +1,32 @@
+import React from 'react';
+import {
+    Text,
+    View,
+    ScrollView
+} from 'react-native';
+
+import style from './style';
+
+
+class ApprovalScreen extends React.Component {
+    render() {
+        return (
+            <View style={{ backgroundColor: '#ffffff' }}>
+                <View style={[style.projectTitle, style.structure]}>
+                    <View style={style.lightBox}></View>
+                    <View>
+                        <Text style={style.titleText}>审批信息</Text>
+                    </View>
+                </View>
+                <View style={[style.structure]}>
+                    <View style={{ marginVertical: 5 }}>
+                        <Text style={{ fontSize: 14, color: '#999999' }}>某某某于 2019-10-01 19:19 审批通过</Text>
+                        <Text style={{ fontSize: 14, color: '#999999' }}>备注信息: 备注备注备注备注备注备注备注</Text>
+                    </View>
+                </View>
+            </View>
+        );
+    }
+}
+
+export default ApprovalScreen;

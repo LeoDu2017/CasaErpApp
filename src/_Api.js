@@ -8,6 +8,9 @@ const API = {
         fetch_sales: `${server}/Statistics/comprehensiveStatistics`,
         fetch_customs: `${server}/Statistics/customerStatistics`,
         fetch_quotations: `${server}/Statistics/quoteStatistics`,
+    },
+    Aftersale:{
+        fetch_mine:`${server}/Aftersale/getMyProcessOrderAfterSaleList`
     }
 };
 

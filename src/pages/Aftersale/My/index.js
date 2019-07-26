@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Image, ScrollView, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView,Text, TouchableOpacity, View} from 'react-native';
 import Loading from '../_Component_loding_status'
 import SaleItem from '../_Component_item'
 import {bindActionCreators} from "redux";
@@ -28,10 +28,15 @@ class Screen extends Component {
     });
     constructor(props) {
         super(props);
+        this.state = {
+            keyword: '',
+            service_status: '',
+            page: 1,
+        }
     };
     componentDidMount(): void {
-        const {loadAction} = this.props;
-        loadAction.load()
+        const {init:{fetch_mine}} = this.props;
+        fetch_mine(this.state)
     }
     render() {
         const {navigation:{navigate},sales,status, isSuccess} = this.props;
@@ -41,13 +46,17 @@ class Screen extends Component {
                     isSuccess ?
                         <ScrollView style={{flex: 1}}>
                             {
-                                sales.map(item =>
-                                    <SaleItem
+                                (sales && sales.length) ?
+                                    sales.map(item =>
+                                        <SaleItem
                                         key= {item.id}
                                         {...item}
                                         onNav={navigate}
                                         url= 'AftersaleSystem/Details'/>
-                                )
+                                        ) :
+                                    <Text style={{alignSelf:'center',paddingTop:100}}>
+                                        暂无更多数据哦~
+                                    </Text>
                             }
                         </ScrollView>
                         : <Loading>
@@ -60,11 +69,13 @@ class Screen extends Component {
 }
 
 export default connect(
-    ({MAftersale}) => ({
-        sales: MAftersale.sales,
-        status: MAftersale.status,
-        isSuccess: MAftersale.isSuccess,
-    }),
+    ({MAftersale:{sales,status,isSuccess}}) =>{
+        return  ({
+            sales,
+            status,
+            isSuccess,
+        })
+    },
     (dispatch) => ({
         init: bindActionCreators(Actions, dispatch)
     })

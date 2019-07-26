@@ -26,8 +26,7 @@ export function createReducer(initialState, handlers) {
 
 export  class NavigationCustomBackMenu extends Component {
     constructor(props){
-        super(props);
-
+        super(props)
     };
     render() {
         const {state:{routeName},goBack} = this.props.nav;
@@ -67,9 +66,12 @@ export function  customNavigationOptions(navigation, headerRight){
             left: TITLE_OFFSET,
             right: TITLE_OFFSET,
         },
-        headerTintColor: '#333333',
+        headerTintColor: '#24292e',
         // headerBackImage: require('./assets/images/navigation/back.png'),
         headerLeft: <NavigationCustomBackMenu nav={navigation}/>,
+        headerStyle:{
+            backgroundColor: '#fff'
+        }
     })
 }
 

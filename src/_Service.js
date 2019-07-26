@@ -40,9 +40,18 @@ export function Achievement_fetch_customs(data){
 }
 // 报价系统_报价信息
 export function Achievement_fetch_quotations(data){
-    console.log('Achievement_fetch_quotations:',data);
     return request({
         url:API.Achievement.fetch_quotations,
+        method: 'post',
+        data:{
+            ...data
+        }
+    })
+}
+// 售后系统_我的售后单
+export function Aftersale_fetch_mine(data){
+    return request({
+        url:API.Aftersale.fetch_mine,
         method: 'post',
         data:{
             ...data

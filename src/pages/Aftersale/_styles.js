@@ -1,14 +1,15 @@
 import {Dimensions, StyleSheet} from "react-native";
+
 const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#efefef'
+        backgroundColor: '#f2f2f2'
         // justifyContent: 'center'
     },
-    item:{
-        backgroundColor: '#f5fcff',
+    item: {
+        backgroundColor: '#fff',
         width,
         marginTop: 10,
         flex: 1,
@@ -18,25 +19,25 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 20,
     },
-    NO:{
-        width:'100%',
+    NO: {
+        width: '100%',
         borderBottomWidth: 1,
         borderBottomColor: '#E6E6E6',
         paddingBottom: 15,
     },
-    NO_text:{
+    NO_text: {
         color: '#999999'
     },
-    row:{
-        width:'100%',
+    row: {
+        width: '100%',
         paddingTop: 15,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    _left:{
+    _left: {
         color: '#333'
     },
-    _right:{
+    _right: {
         color: '#333'
     },
 });

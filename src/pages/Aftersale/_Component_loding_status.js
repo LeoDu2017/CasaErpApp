@@ -1,9 +1,9 @@
 import React from 'react'
 import {View,Text} from 'react-native'
-import styles from './_styles'
+
 
 const Screen = ({children}) =>
-    <View style={styles.container}>
+    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
         <Text> {children}</Text>
     </View>;
 

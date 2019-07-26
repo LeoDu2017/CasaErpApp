@@ -34,7 +34,6 @@ const System = ({name,sub,onNav,seprate}) =>
             seprate && <View style={styles.interval}>
             </View>
         }
-
     </View>;
 
 export default System

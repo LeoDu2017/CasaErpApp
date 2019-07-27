@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Image, ScrollView, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Loading from '../_Component_loding_status'
 import SaleItem from '../_Component_item'
 import {bindActionCreators} from "redux";
@@ -12,24 +12,32 @@ class Screen extends Component {
     static  navigationOptions = ({navigation}) => ({
         title: '部门售后单',
         ...customNavigationOptions(navigation,
-        <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => alert('filter')}>
-        <Image style={{height: 20, width: 20}}
-        source={require('../../../assets/images/navigation/nav_select.png')}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => alert('search')}>
-        <Image style={{height: 20, width: 20}}
-        source={require('../../../assets/images/navigation/nav_search.png')}/>
-        </TouchableOpacity>
-        </View>
+            <View style={{flexDirection: 'row',right:14}}>
+                <TouchableOpacity
+                    style={{marginRight:5}}
+                    onPress={() => alert('filter')}>
+                    <Image style={{height: 20, width: 20}}
+                           source={require('../../../assets/images/navigation/nav_select.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => alert('search')}>
+                    <Image style={{height: 20, width: 20}}
+                           source={require('../../../assets/images/navigation/nav_search.png')}/>
+                </TouchableOpacity>
+            </View>
         )
     });
     constructor(props) {
         super(props);
+        this.state={
+            keyword: '',
+            service_status: '',
+            dept_id: '',
+            page:'',
+        }
     };
     componentDidMount(): void {
-        const {loadAction} = this.props;
-        loadAction.load()
+        const {init:{fetch_department}} = this.props;
+        fetch_department(this.state)
     }
     render() {
         const {navigation:{navigate},sales,status, isSuccess} = this.props;
@@ -39,13 +47,17 @@ class Screen extends Component {
                     isSuccess ?
                         <ScrollView style={{flex: 1}}>
                             {
-                                sales.map(item =>
-                                    <SaleItem
-                                        key= {item.id}
-                                        {...item}
-                                        onNav={navigate}
-                                        url= 'AftersaleSystem/Details'/>
-                                )
+                                (sales && sales.length) ?
+                                    sales.map(item =>
+                                        <SaleItem
+                                            key= {item.id}
+                                            {...item}
+                                            onNav={navigate}
+                                            url= 'AftersaleSystem/Details'/>
+                                    ) :
+                                    <Text style={{alignSelf:'center',paddingTop:100}}>
+                                        暂无更多数据哦~
+                                    </Text>
                             }
                         </ScrollView>
                         : <Loading>
@@ -58,12 +70,12 @@ class Screen extends Component {
 }
 
 export default connect(
-    ({MAftersale}) => ({
-        sales: MAftersale.sales,
-        status: MAftersale.status,
-        isSuccess: MAftersale.isSuccess,
+    ({MAftersale:{sales,status,isSuccess}}) => ({
+        sales,
+        status,
+        isSuccess,
     }),
     (dispatch) => ({
-        loadAction: bindActionCreators(Actions, dispatch)
+        init: bindActionCreators(Actions, dispatch)
     })
 )(Screen)

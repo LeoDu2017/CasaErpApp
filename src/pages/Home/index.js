@@ -15,14 +15,14 @@ import styles from './_styles'
 import actions from './_actions'
 import System from './_component'
 
-StatusBar.setBackgroundColor('#f5fcff');
+StatusBar.setBackgroundColor('#fff');
 StatusBar.setBarStyle('dark-content');
 
 class Page extends Component{
     constructor(pops) {
         super(pops);
         this._navListener = this.props.navigation.addListener('didFocus', (nav) => {
-            StatusBar.setBackgroundColor('#f5fcff');
+            StatusBar.setBackgroundColor('#fff');
             StatusBar.setBarStyle('dark-content');
             StatusBar.setTranslucent(false);
             //!IOS && StatusBar.setBackgroundColor('#6a51ae');

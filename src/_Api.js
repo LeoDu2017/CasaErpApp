@@ -1,4 +1,4 @@
-const Development = true;
+const Development = false;
 const server = Development ?'http://app.casaerp.cn':'https://app.casaerp.com';
 
 const API = {
@@ -12,6 +12,7 @@ const API = {
     Aftersale:{
         fetch_mine:`${server}/Aftersale/getMyProcessOrderAfterSaleList`,
         fetch_department:`${server}/Aftersale/getDeptOrderAfterSaleList`,
+        fetch_detail:`${server}/Aftersale/orderAfterSaleDetail`,
     }
 };
 

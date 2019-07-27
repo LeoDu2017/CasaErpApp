@@ -28,7 +28,7 @@ class Screen extends Component {
     constructor(props){
         super(props);
         this.state = {
-            username:'gyh',
+            username:'ll',
             password:md5.hex_md5('casa*2018')
         }
     };

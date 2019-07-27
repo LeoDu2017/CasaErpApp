@@ -1,17 +1,22 @@
 import React from 'react'
-import {View,Text,TouchableOpacity} from 'react-native'
+import {View, Text, TouchableOpacity} from 'react-native'
 import styles from './_styles'
+
 const Screen = ({
-                    contract_num,
-                    customer_name,
-                    project_name,
-                    distributor,
-                    status}) => (
-    <TouchableOpacity>
+    id,
+    url,
+    onNav,
+    csr_name,
+    contract_code,
+    project_address,
+    delivery_user_name,
+    service_status_name,
+}) => (
+    <TouchableOpacity onPress={()=>{onNav(url,{id})}}>
         <View style={styles.item}>
             <View style={styles.NO}>
                 <Text style={styles.NO_text}>
-                    合同编号：{contract_num}
+                    合同编号：{contract_code}
                 </Text>
             </View>
             <View style={styles.row}>
@@ -19,7 +24,7 @@ const Screen = ({
                     客户姓名
                 </Text>
                 <Text style={styles._right}>
-                    {customer_name}
+                    {csr_name}
                 </Text>
             </View>
             <View style={styles.row}>
@@ -27,7 +32,7 @@ const Screen = ({
                     项目名称
                 </Text>
                 <Text style={styles._right}>
-                    {project_name}
+                    {project_address}
                 </Text>
             </View>
             <View style={styles.row}>
@@ -35,7 +40,7 @@ const Screen = ({
                     配送人
                 </Text>
                 <Text style={styles._right}>
-                    {distributor}
+                    {delivery_user_name}
                 </Text>
             </View>
             <View style={styles.row}>
@@ -43,7 +48,7 @@ const Screen = ({
                     状态
                 </Text>
                 <Text style={styles._right}>
-                    {status}
+                    {service_status_name}
                 </Text>
             </View>
         </View>

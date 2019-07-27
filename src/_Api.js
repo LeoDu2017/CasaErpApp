@@ -10,7 +10,8 @@ const API = {
         fetch_quotations: `${server}/Statistics/quoteStatistics`,
     },
     Aftersale:{
-        fetch_mine:`${server}/Aftersale/getMyProcessOrderAfterSaleList`
+        fetch_mine:`${server}/Aftersale/getMyProcessOrderAfterSaleList`,
+        fetch_department:`${server}/Aftersale/getDeptOrderAfterSaleList`,
     }
 };
 

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     title:{
-        color:'#f5fcff',fontSize:14
+        color:'#fff',fontSize:14
     },
     division:{
         width: 1,height: 30,backgroundColor:'rgba(255,255,255,.5)'
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     Swiper_wrapper:{
         width,
         flex: 1,
-        backgroundColor: '#f5fcff'
+        backgroundColor: '#fff'
     }
 });
 export default styles

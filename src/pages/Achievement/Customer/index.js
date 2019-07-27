@@ -24,7 +24,7 @@ class Screen extends Component {
             <View style={{right: 15}}>
                 <ModalDropdown
                     defaultValue={'2019年'}
-                    textStyle={{color: '#f5fcff', fontSize: 16}}
+                    textStyle={{color: '#fff', fontSize: 16}}
                     dropdownTextStyle={{
                         width: 120,
                         fontSize: 16,
@@ -46,7 +46,7 @@ class Screen extends Component {
                 />
             </View>),
         headerTransparent: 'true',
-        headerTintColor: '#f5fcff',
+        headerTintColor: '#fff',
         headerStyle: {marginTop: 20}
     });
 

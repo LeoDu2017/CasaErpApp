@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     report_item:{
         width:width,
-        backgroundColor: '#f5fcff',
+        backgroundColor: '#fff',
         padding: 16,
         marginTop: 10
     },

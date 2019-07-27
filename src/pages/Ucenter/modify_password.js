@@ -24,7 +24,7 @@ class Index extends Component {
             new_pwd: ''
         };
         this._navListener = this.props.navigation.addListener('didFocus', (nav) => {
-            StatusBar.setBackgroundColor('#f5fcff');
+            StatusBar.setBackgroundColor('#fff');
             StatusBar.setBarStyle('dark-content');
             StatusBar.setTranslucent(false);
             //!IOS && StatusBar.setBackgroundColor('#6a51ae');
@@ -45,7 +45,7 @@ class Index extends Component {
     }
     render() {
         return (
-            <View style={{flex: 1, backgroundColor: '#f5fcff'}}>
+            <View style={{flex: 1, backgroundColor: '#fff'}}>
                 <View style={styles.loginInput}>
                     <View style={styles.input_wrap}>
                         <Image

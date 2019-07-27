@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f5fcff',
+        backgroundColor: '#fff',
         padding: 20
     },
     name: {
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
     button_text:{
-        color: '#f5fcff',
+        color: '#fff',
         fontSize: 18,
     }
 });

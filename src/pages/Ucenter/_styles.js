@@ -5,10 +5,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems:'center',
-        backgroundColor: '#f5fcff'
+        backgroundColor: '#fff'
     },
     wrapper_1:{
-        backgroundColor: '#f5fcff',
+        backgroundColor: '#fff',
         height: 380,
         marginBottom: 10,
     },
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     header:{
         fontSize: 20,
         textAlign: 'center',
-        color: '#f5fcff'
+        color: '#fff'
     },
     info_img: {
         height: 240,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     wrapper_2:{
         width: '100%',
-        backgroundColor: '#f5fcff',
+        backgroundColor: '#fff',
         paddingLeft: 15,
         paddingRight: 15,
     },
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     drawer_container:{
         height: 200,
         width: '100%',
-        backgroundColor:'#f5fcff'
+        backgroundColor:'#fff'
     },
     drawer_item:{
         height:50,
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         lineHeight: 40,
-        color: '#f5fcff'
+        color: '#fff'
     },
     icon:{
         height: 20,

@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         borderRadius: 4
     },
     text:{
-        color: '#f5fcff',
+        color: '#fff',
         fontSize: 16
     }
 });

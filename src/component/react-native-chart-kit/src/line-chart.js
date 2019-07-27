@@ -72,7 +72,7 @@ class LineChart extends AbstractChart {
             cx={cx}
             cy={cy}
             r="12"
-            fill="#f5fcff"
+            fill="#fff"
             fillOpacity={0}
             onPress={onPress}
           />

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     wrap:{
         width,
         justifyContent: 'flex-start',
-        backgroundColor: '#f5fcff',
+        backgroundColor: '#fff',
     },
     menuTitle:{
         width,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     interval: {
         height: 10,
-        backgroundColor: '#e9f7fd'
+        backgroundColor: '#f2f2f2'
     },
     lightBox: {
         width: 4,

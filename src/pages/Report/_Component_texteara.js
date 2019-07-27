@@ -23,7 +23,7 @@ export default ({edit,title,subtitle,data,name}) =>
         <View style={styles.texteara_box}>
             {
                 edit ?
-                    <View style={{minHeight:92,backgroundColor:'#f5fcff'}}>
+                    <View style={{minHeight:92,backgroundColor:'#fff'}}>
                         <View style={{minHeight:92, padding: 5,borderColor:'#ccc',borderWidth:1}}>
                             <TextInput
                                 style={styles.texteara}

@@ -154,7 +154,7 @@ class MyReportDetail extends Component{
 const styles = StyleSheet.create({
     report_data:{
         width,
-        backgroundColor: '#f5fcff',
+        backgroundColor: '#fff',
         padding: 15,
         marginTop: 10,
     },

@@ -6,18 +6,6 @@ import {
 } from "./_actionTypes";
 import {Aftersale_fetch_mine} from "../../../_Service";
 
-
-const load = () =>{
-    return dispatch => {
-        dispatch(doing());
-        // let result = fetch('https://www.baidu.com/')
-        //     .then((res) => {
-        //         dispatch(success(sales)); // 登录请求完成
-        //     }).catch((e) => {
-        //         dispatch(error(false)); // 登录请求出错
-        //     })
-    }
-};
 const fetch_mine = (data) => {
     return (dispatch) => {
         dispatch(doing());

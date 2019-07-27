@@ -58,3 +58,13 @@ export function Aftersale_fetch_mine(data){
         }
     })
 }
+// 售后系统_部门售后单
+export function Aftersale_fetch_department(data){
+    return request({
+        url:API.Aftersale.fetch_department,
+        method: 'post',
+        data:{
+            ...data
+        }
+    })
+}

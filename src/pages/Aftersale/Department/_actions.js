@@ -1,41 +1,31 @@
-import {LOADING_AFTERSALE,LOADING_SUCCESS,LOADING_ERROR} from "./_actionTypes";
+import {LOADING_AFTERSALE,LOADING_SUCCESS,LOADING_ERROR,SET_DEPARTMENT} from "./_actionTypes";
+import {Aftersale_fetch_department} from "../../../_Service";
 
-const sales = [
-    {
-        contract_num:'HBXD20180935BJ',
-        customer_name:'安宁',
-        project_name:'顺义别墅',
-        distributor:'嵩利民',
-        status:'销售经理审核',
-        id:'001'
-    },{
-        contract_num:'HBXD20180935BJ',
-        customer_name:'安宁',
-        project_name:'顺义别墅',
-        distributor:'嵩利民',
-        status:'销售经理审核',
-        id:'002'
-    },{
-        contract_num:'HBXD20180935BJ',
-        customer_name:'安宁',
-        project_name:'顺义别墅',
-        distributor:'嵩利民',
-        status:'销售经理审核',
-        id:'003'
-    }
-];
 
-const load = () =>{
-    return dispatch => {
+const fetch_department = (data) => {
+    return (dispatch) => {
         dispatch(doing());
-        let result = fetch('https://www.baidu.com/')
-            .then((res) => {
-                dispatch(success(sales)); // 登录请求完成
-            }).catch((e) => {
-                dispatch(error(false)); // 登录请求出错
-            })
+        Aftersale_fetch_department(data).then(
+            ({status,data,mag}) => {
+                if(status){
+                    dispatch(success());
+                    dispatch(setDepartment(data))
+                }else{
+                    dispatch(fail());
+                }
+            }
+        ).catch()
     }
 };
+
+function setDepartment(data){
+    return {
+        type:SET_DEPARTMENT,
+        payload:{
+            sales: data
+        }
+    }
+}
 function doing(){
     return {
         type: LOADING_AFTERSALE
@@ -53,5 +43,5 @@ function error(){
     }
 }
 export default {
-    load
+    fetch_department
 }

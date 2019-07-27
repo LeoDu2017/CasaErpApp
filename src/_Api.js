@@ -1,4 +1,4 @@
-const Development = false;
+const Development = true;
 const server = Development ?'http://app.casaerp.cn':'https://app.casaerp.com';
 
 const API = {

@@ -14,7 +14,6 @@ const Products = ({products}) =>
                 <Item title={product.prod_name} icon={1} border={1} normal={1}/>
                 <Item title="产品品牌" value={product.brand_name_en} border={1}/>
                 <Item title="产品型号" value={product.prod_model} border={1}/>
-
                 <View style={{width: (width - 25),borderStyle:'dashed', borderBottomWidth: 1, borderColor: '#f2f2f2'}}>
                     <Item title="售后问题" border={0}/>
                     <SubTitle title='售后问题:'/>

@@ -8,7 +8,7 @@ import Actions from './_actions';
 import styles from '../_styles';
 import {customNavigationOptions} from "../../../_Util";
 import {Drawer} from 'teaset';
-import FilterComponent from '../_Component_filter'
+import FilterComponent from '../../_Component_filter'
 
 class Screen extends Component {
     static  navigationOptions = ({navigation}) => ({

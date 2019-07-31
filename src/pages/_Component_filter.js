@@ -1,8 +1,8 @@
 import React,{Component} from 'react'
 import {Text, TouchableOpacity, View,Image,ScrollView} from "react-native";
-import styles from "./_styles";
-import icon_down from '../../assets/images/filter/arrow_down.png'
-import icon_up from '../../assets/images/filter/arrow_up.png'
+import styles from "./Aftersale/_styles";
+import icon_down from '../assets/images/filter/arrow_down.png'
+import icon_up from '../assets/images/filter/arrow_up.png'
 
 class Options extends Component{
     constructor(props){

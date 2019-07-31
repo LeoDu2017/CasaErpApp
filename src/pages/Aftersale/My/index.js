@@ -17,7 +17,7 @@ class Screen extends Component {
             <View style={{flexDirection: 'row', right: 14}}>
                 <TouchableOpacity
                     style={{marginRight: 15}}
-                    onPress={() => navigation.state.params.onFilter('right')}>
+                    onPress={() => navigation.state.params.showFilter('right')}>
                     <Image style={{height: 20, width: 20}}
                            source={require('../../../assets/images/navigation/nav_select.png')}/>
                 </TouchableOpacity>
@@ -34,28 +34,36 @@ class Screen extends Component {
         this.state = {
             parameter: {
                 keyword: '',
-                service_status: '',
+                service_status: '-1',
                 page: 1,
             },
             rootTransform: 'none',
-            filterID: '-1'
         }
     };
 
     toggleMenu(side){
         let { rootTransform,filterID} = this.state;
         this.drawer = Drawer.open(this.renderDrawerMenu(filterID), side, rootTransform);
-    };
 
-    renderDrawerMenu(filterID){
-        return <FilterComponent filterID={filterID} filters={this.props.filters}/>
+    };
+    onFilter(parameter){
+        const {init: {fetch_mine}} = this.props;
+        this.setState({parameter:{...parameter}});
+        fetch_mine({...this.state.parameter,...parameter});
+    };
+    renderDrawerMenu(){
+        return <FilterComponent
+                    onFilter={this.onFilter.bind(this)}
+                    onClose={()=>{this.drawer && this.drawer.close()}}
+                    filterType={{service_status: this.state.parameter.service_status}}
+                    filters={this.props.filters}/>
     };
 
     componentDidMount(): void {
         const {init: {fetch_mine}} = this.props;
         fetch_mine(this.state.parameter);
         this.props.navigation.setParams({
-            onFilter: this.toggleMenu.bind(this)
+            showFilter: this.toggleMenu.bind(this)
         });
     }
 

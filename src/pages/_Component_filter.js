@@ -7,17 +7,20 @@ import icon_up from '../assets/images/filter/arrow_up.png'
 class Options extends Component{
     constructor(props){
         super(props);
+        const {filterType} = this.props;
         this.state={
             open: false,
-            filterID: '-1'
+            ...filterType
         }
     };
     setFilterID(filterID){
-        this.setState({filterID});
+        const {setFilter,filter:{value}} = this.props;
+        this.setState({[value]:filterID});
+        setFilter({[value]:filterID})
     };
     render(){
         const {filter} = this.props;
-        return (<View key={filter.value}>
+        return (<View>
                     <View
                         style={styles.filter_title}>
                         <Text style={styles.filter_title_text}>
@@ -40,7 +43,7 @@ class Options extends Component{
                                         <Text
                                             numberOfLines={1}
                                             style={[styles.filter_data_title,
-                                                this.state.filterID === item.value ?
+                                                this.state[filter.value] === item.value ?
                                                     styles.filter_data_selected : null]}>
                                             {item.title}
                                         </Text>
@@ -52,25 +55,48 @@ class Options extends Component{
                 </View>)
     }
 }
-const Filter = ({filters}) =>
-    <View style={styles.filter_window}>
-        <View style={styles.filter_option_wrap}>
-            <ScrollView>
-                {
-                    filters.map(filter => {
-                        return <Options filter={filter}/>
-                    })
-                }
-            </ScrollView>
-        </View>
-        <View style={styles.filter_footer}>
-            <TouchableOpacity style={{flex:1,height:42,backgroundColor:'#EDF0F2'}}>
-                <Text style={{textAlign: 'center',color:'#333',fontSize:16,lineHeight:42}}>重置</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{flex:1,height:42,backgroundColor:'#3496FB'}}>
-                <Text style={{textAlign:'center',color:'#fff',fontSize:16,lineHeight:42}}>确定</Text>
-            </TouchableOpacity>
-        </View>
-    </View>;
+class Filter extends Component{
+    constructor(props){
+        super(props);
+        const {filterType} = this.props;
+        this.state = {...filterType};
+        this.onSubmit = this.onSubmit.bind(this)
+    };
+    setFilter(filterOption){
+        this.setState(filterOption)
+    };
+    onSubmit(){
+        const {onFilter,onClose} = this.props;
+        onFilter(this.state);
+        onClose && onClose();
+    };
+    render(){
+        const {filters,filterType} = this.props;
+        return (
+            <View style={styles.filter_window}>
+                <View style={styles.filter_option_wrap}>
+                    <ScrollView>
+                        {
+                            filters.map(filter => {
+                                return <Options filterType={filterType}  key={filter.value} setFilter={this.setFilter.bind(this)} filter={filter}/>
+                            })
+                        }
+                    </ScrollView>
+                </View>
+                <View style={styles.filter_footer}>
+                    <TouchableOpacity style={{flex:1,height:42,backgroundColor:'#EDF0F2'}}>
+                        <Text style={{textAlign: 'center',color:'#333',fontSize:16,lineHeight:42}}>重置</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={()=> this.onSubmit()}
+                        style={{flex:1,height:42,backgroundColor:'#3496FB'}}>
+                        <Text style={{textAlign:'center',color:'#fff',fontSize:16,lineHeight:42}}>确定</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+}
+
 
 export default Filter

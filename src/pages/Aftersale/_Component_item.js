@@ -35,7 +35,7 @@ class Screen extends Component{
             status,
             button_change_status,
         } = this.props;
-        const data = {
+        const titles = {
             csr_name:'客户姓名',
             project_address:'项目名称',
             delivery_user_name:'配送人',
@@ -50,8 +50,8 @@ class Screen extends Component{
                         </Text>
                     </View>
                     {
-                        Object.keys(data).map( key =>
-                            <Item key={Math.random()} title={data[key]} value={key}/>
+                        Object.keys(titles).map( key =>
+                            <Item key={Math.random()} title={titles[key]} value={this.props[key]}/>
                         )
                     }
 

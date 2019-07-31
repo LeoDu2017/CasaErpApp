@@ -1,41 +1,33 @@
-import {LOADING_AFTERSALE,LOADING_SUCCESS,LOADING_ERROR} from "./_actionTypes";
+import {LOADING_AFTERSALE,SET_DETAIL} from "./_actionTypes";
+import {Aftersale_fetch_detail} from "../../../_Service";
 
-const sale =  {
-    contract_num:'HBXD20180935BJ',
-    customer_name:'安宁',
-    project_name:'顺义别墅',
-    distributor:'嵩利民',
-    status:'销售经理审核',
-    id:'001'
-};
-
-const load = () =>{
-    return dispatch => {
+const fetch_detail = (data) => {
+    return (dispatch) => {
         dispatch(doing());
-        let result = fetch('https://www.baidu.com/')
-            .then((res) => {
-                dispatch(success(sale)); // 登录请求完成
-            }).catch((e) => {
-                dispatch(error(false)); // 登录请求出错
-            })
+        Aftersale_fetch_detail(data).then(
+            ({status,data})=>{
+                if(status){
+                    dispatch(setDetail(data))
+                }else{
+
+                }
+            }
+        ).catch()
     }
 };
+
 function doing(){
     return {
         type: LOADING_AFTERSALE
     }
 }
-function success(sale){
+
+function setDetail(data){
     return {
-        type:LOADING_SUCCESS ,
-        sale
-    }
-}
-function error(){
-    return {
-        type: LOADING_ERROR
+        type: SET_DETAIL,
+        payload: data
     }
 }
 export default {
-    load
+    fetch_detail
 }

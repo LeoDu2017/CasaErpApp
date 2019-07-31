@@ -1,45 +1,66 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Image, ScrollView,Text, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Loading from '../_Component_loding_status'
 import SaleItem from '../_Component_item'
 import {bindActionCreators} from "redux";
 import Actions from './_actions';
 import styles from '../_styles';
 import {customNavigationOptions} from "../../../_Util";
+import {Drawer} from 'teaset';
+import FilterComponent from '../_Component_filter'
 
 class Screen extends Component {
-    static  navigationOptions =  ({navigation}) => ({
+    static  navigationOptions = ({navigation}) => ({
         title: '我的售后单',
         ...customNavigationOptions(navigation,
-        <View style={{flexDirection: 'row',right:14}}>
-            <TouchableOpacity
-                style={{marginRight:5}}
-                onPress={() => alert('filter')}>
-                <Image style={{height: 20, width: 20}}
-                    source={require('../../../assets/images/navigation/nav_select.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => alert('search')}>
-                <Image style={{height: 20, width: 20}}
-                    source={require('../../../assets/images/navigation/nav_search.png')}/>
-            </TouchableOpacity>
-        </View>
+            <View style={{flexDirection: 'row', right: 14}}>
+                <TouchableOpacity
+                    style={{marginRight: 15}}
+                    onPress={() => navigation.state.params.onFilter('right')}>
+                    <Image style={{height: 20, width: 20}}
+                           source={require('../../../assets/images/navigation/nav_select.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => alert('search')}>
+                    <Image style={{height: 20, width: 20}}
+                           source={require('../../../assets/images/navigation/nav_search.png')}/>
+                </TouchableOpacity>
+            </View>
         )
     });
+
     constructor(props) {
         super(props);
         this.state = {
-            keyword: '',
-            service_status: '',
-            page: 1,
+            parameter: {
+                keyword: '',
+                service_status: '',
+                page: 1,
+            },
+            rootTransform: 'none',
+            filterID: '-1'
         }
     };
+
+    toggleMenu(side){
+        let { rootTransform,filterID} = this.state;
+        this.drawer = Drawer.open(this.renderDrawerMenu(filterID), side, rootTransform);
+    };
+
+    renderDrawerMenu(filterID){
+        return <FilterComponent filterID={filterID} filters={this.props.filters}/>
+    };
+
     componentDidMount(): void {
-        const {init:{fetch_mine}} = this.props;
-        fetch_mine(this.state)
+        const {init: {fetch_mine}} = this.props;
+        fetch_mine(this.state.parameter);
+        this.props.navigation.setParams({
+            onFilter: this.toggleMenu.bind(this)
+        });
     }
+
     render() {
-        const {navigation:{navigate},sales,status, isSuccess} = this.props;
+        const {navigation: {navigate}, sales, status, AfterSaleStatusList, isSuccess} = this.props;
         return (
             <View style={styles.container}>
                 {
@@ -49,12 +70,13 @@ class Screen extends Component {
                                 (sales && sales.length) ?
                                     sales.map(item =>
                                         <SaleItem
-                                        key= {item.id}
-                                        {...item}
-                                        onNav={navigate}
-                                        url= 'AftersaleSystem/Details'/>
-                                        ) :
-                                    <Text style={{alignSelf:'center',paddingTop:100}}>
+                                            key={item.id}
+                                            {...item}
+                                            onNav={navigate}
+                                            status={AfterSaleStatusList}
+                                            url='AftersaleSystem/Details'/>
+                                    ) :
+                                    <Text style={{alignSelf: 'center', paddingTop: 100}}>
                                         暂无更多数据哦~
                                     </Text>
                             }
@@ -69,9 +91,11 @@ class Screen extends Component {
 }
 
 export default connect(
-    ({MAftersale:{sales,status,isSuccess}}) =>{
-        return  ({
+    ({MAftersale: {sales, status, AfterSaleStatusList,filters, isSuccess}}) => {
+        return ({
             sales,
+            AfterSaleStatusList,
+            filters,
             status,
             isSuccess,
         })

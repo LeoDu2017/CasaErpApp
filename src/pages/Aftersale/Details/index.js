@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ScrollView,View} from 'react-native';
 import Loading from '../_Component_loding_status'
-import SaleItem from '../_Component_item'
 import {bindActionCreators} from "redux";
 import Actions from './_actions';
 import styles from '../_styles';
+import BaseInfo from '../_Component_base_info';
+import Products from '../_Component_products';
 import {customNavigationOptions} from "../../../_Util";
 
 class Screen extends Component {
@@ -17,17 +18,18 @@ class Screen extends Component {
         super(props);
     };
     componentDidMount(): void {
-        const {loadAction} = this.props;
-        loadAction.load()
+        const {init,navigation:{state:{params:{id}}}} = this.props;
+        init.fetch_detail({id})
     }
     render() {
-        const {navigation:{navigate},sale,status, isSuccess} = this.props;
+        const {base_info,prod_question,status, isSuccess} = this.props;
         return (
             <View style={styles.container}>
                 {
                     isSuccess ?
                         <ScrollView style={{flex: 1}}>
-
+                            <BaseInfo base_info={base_info}/>
+                            <Products products={prod_question}/>
                         </ScrollView>
                         : <Loading>
                             {status}
@@ -39,12 +41,16 @@ class Screen extends Component {
 }
 
 export default connect(
-    ({MAftersale}) => ({
-        sale: MAftersale.sale,
-        status: MAftersale.status,
-        isSuccess: MAftersale.isSuccess,
-    }),
+    ({ADtails:{status,isSuccess,base_info,log,prod_question}}) => {
+        return ({
+            log,
+            status,
+            isSuccess,
+            base_info,
+            prod_question
+        })
+    },
     (dispatch) => ({
-        loadAction: bindActionCreators(Actions, dispatch)
+        init: bindActionCreators(Actions, dispatch)
     })
 )(Screen)

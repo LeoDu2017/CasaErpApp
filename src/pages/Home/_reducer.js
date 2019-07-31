@@ -7,21 +7,21 @@ const initialState = [
         name: '待审核',
         sub: [
             {
-                icon: require('../../assets/images/home/orderReview.png'),
-                name: '订单审核',
-                path: 'OrderReview'
-            }, {
                 icon: require('../../assets/images/home/contractApproval.png'),
                 name: '合同审批',
-                path: 'ContractApproval'
+                path: 'Review/ContractApproval'
             }, {
                 icon: require('../../assets/images/home/orderChange.png'),
                 name: '订单变更',
-                path: 'OrderChange'
+                path: 'Review/OrderChange'
+            }, {
+                icon: require('../../assets/images/home/orderReview.png'),
+                name: '售后单',
+                path: 'Review/Order'
             }, {
                 icon: require('../../assets/images/home/invoice.png'),
                 name: '发货单',
-                path: 'Invoice'
+                path: 'Review/Invoice'
             }
         ]
     },{
@@ -30,19 +30,19 @@ const initialState = [
             {
                 icon: require('../../assets/images/home/myClient.png'),
                 name: '我的客户',
-                path: ''
+                path: 'Client/MyClient'
             }, {
                 icon: require('../../assets/images/home/departmentClient.png'),
                 name: '部门客户',
-                path: ''
+                path: 'Client/DepartmentClient'
             }, {
                 icon: require('../../assets/images/home/myFollow.png'),
                 name: '我的跟进',
-                path: ''
+                path: 'Client/MyFollow'
             }, {
                 icon: require('../../assets/images/home/departmentFollow.png'),
                 name: '部门跟进',
-                path: ''
+                path: 'Client/DepartmentFollow'
             }
         ]
     }, {
@@ -51,35 +51,35 @@ const initialState = [
             {
                 icon: require('../../assets/images/home/myQuote.png'),
                 name: '我的报价',
-                path: ''
+                path: 'OrderQuota/MyQuota'
             }, {
                 icon: require('../../assets/images/home/departmentQuote.png'),
                 name: '部门报价',
-                path: ''
+                path: 'OrderQuota/DepartmentQuota'
             }, {
                 icon: require('../../assets/images/home/myOrder.png'),
                 name: '我的订单',
-                path: ''
+                path: 'OrderQuota/MyOrder'
             }, {
                 icon: require('../../assets/images/home/departmentOrder.png'),
                 name: '部门订单',
-                path: ''
+                path: 'OrderQuota/DepartmentOrder'
             }, {
                 icon: require('../../assets/images/home/myContract.png'),
                 name: '我的合同审批',
-                path: ''
+                path: 'OrderQuota/MyContractApproval'
             }, {
                 icon: require('../../assets/images/home/departmentContract.png'),
                 name: '部门合同审批',
-                path: ''
+                path: 'OrderQuota/DepartmentContractApproval'
             }, {
                 icon: require('../../assets/images/home/myChangeOrder.png'),
                 name: '我的变更订单',
-                path: ''
+                path: 'OrderQuota/MyChangeOrder'
             }, {
                 icon: require('../../assets/images/home/departmentChangeOrder.png'),
                 name: '部门变更订单',
-                path: ''
+                path: 'OrderQuota/DepartmentChangeOrder'
             }
         ]
     }, {

@@ -21,11 +21,11 @@ const Products = ({products}) =>
                     <SubTitle title='售后图片:'/>
                     <View style={{flexDirection: 'row', flex: 1, width: (width - 20), flexWrap: 'wrap'}}>
                         {
-                            product.prod_pic.length && product.prod_pic.map((item, index) =>
+                            product.prod_pic.length ? product.prod_pic.map((item, index) =>
                                 <Image key={index}
                                        style={{width: 75, height: 50, marginBottom: 10, marginRight: 10}}
                                        source={{uri: `${item}@50h_75w_1e_1c`}}/>
-                            )
+                            ) : null
                         }
                     </View>
                 </View>
@@ -46,22 +46,22 @@ const Products = ({products}) =>
 const Item = ({title, value, border, icon, normal,top}) =>
     <View style={[
         {minHeight: 44, width: (width - 30), flexDirection: 'row'},
-        border && {borderStyle:'dashed', borderBottomWidth: 1, borderColor: '#f2f2f2'},
-        !top && {alignItems: 'center'}
+        border ? {borderStyle:'dashed', borderBottomWidth: 1, borderColor: '#f2f2f2'} : null,
+        !top ? {alignItems: 'center'} : null
         ]}>
         {
-            icon && <Image style={{height: 16, width: 16}} source={require('../../assets/images/report/icon.png')}/>
+            icon ? <Image style={{height: 16, width: 16}} source={require('../../assets/images/report/icon.png')}/> : null
         }
 
         <Text style={[{color: '#999',fontSize: 14, marginRight: 10,justifyContent:'space-between',textAlign:'justify'},
-            !normal &&
-            {width: 60, marginRight:20}]}>
+            !normal?
+            {width: 60, marginRight:20}: null]}>
             {title.replace(/[\r\n]/g, "")}
         </Text>
         {
-            value && <Text style={{color: '#333', width:(width - 110), fontSize: 14, textAlign: 'auto'}}>
+            value? <Text style={{color: '#333', width:(width - 110), fontSize: 14, textAlign: 'auto'}}>
                 {value.replace(/[\r\n]/g, "")}
-            </Text>
+            </Text> : null
         }
     </View>;
 const SubTitle = ({title}) =>

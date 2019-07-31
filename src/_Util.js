@@ -15,10 +15,10 @@ export function pxToDp(uiElementPx) {
 export function createReducer(initialState, handlers) {
     return function reducer(state = initialState,action) {
         if (handlers.hasOwnProperty(action.type)){
-            console.log('****************************');
+            // console.log('****************************');
             return handlers[action.type](state,action)
         }else{
-            console.log('==============================');
+            // console.log('==============================');
             return state
         }
     }

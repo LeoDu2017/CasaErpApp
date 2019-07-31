@@ -1,19 +1,26 @@
 import {
     LOADING_AFTERSALE,
     LOADING_SUCCESS,
-    LOADING_ERROR,
-    SET_MINE
+    SET_MINE,
+    SET_STATUS,
+    SET_FILTERS
 } from "./_actionTypes";
-import {Aftersale_fetch_mine} from "../../../_Service";
+import {
+    Aftersale_fetch_mine,
+    Aftersale_fetch_status_list,
+    Aftersale_fetch_my_fliters
+} from "../../../_Service";
 
 const fetch_mine = (data) => {
     return (dispatch) => {
         dispatch(doing());
         Aftersale_fetch_mine(data).then(
-            ({status,data,mag}) => {
+            ({status,data}) => {
                if(status){
                    dispatch(success());
-                   dispatch(setMine(data))
+                   dispatch(setMine(data));
+                   dispatch(fetch_status_list());
+                   dispatch(fetch_filter_options())
                }else{
                    dispatch(fail());
                }
@@ -21,7 +28,30 @@ const fetch_mine = (data) => {
         ).catch()
     }
 };
-
+const fetch_status_list = () => {
+    return (dispatch) => {
+        Aftersale_fetch_status_list().then(
+            ({status,data}) => {
+                if(status){
+                    dispatch(setStatus(data));
+                }
+            }
+        ).catch()
+    }
+};
+const fetch_filter_options = () => {
+    return (dispatch) => {
+        Aftersale_fetch_my_fliters().then(
+            ({status,data}) => {
+                if(status){
+                    dispatch(setFilter(data));
+                }else{
+                    dispatch(fail());
+                }
+            }
+        ).catch()
+    }
+};
 function setMine(data){
     return {
         type:SET_MINE,
@@ -44,36 +74,19 @@ function success(){
         type:LOADING_SUCCESS
     }
 }
-function error(){
+
+function setStatus(data){
     return {
-        type: LOADING_ERROR
+        type: SET_STATUS,
+        payload: data
+    }
+}
+function setFilter(data){
+    return {
+        type: SET_FILTERS,
+        payload: data
     }
 }
 export default {
     fetch_mine
 }
-
-// const sales = [
-//     {
-//         contract_num:'HBXD20180935BJ',
-//         customer_name:'安宁',
-//         project_name:'顺义别墅',
-//         distributor:'嵩利民',
-//         status:'销售经理审核',
-//         id:'001'
-//     },{
-//         contract_num:'HBXD20180935BJ',
-//         customer_name:'安宁',
-//         project_name:'顺义别墅',
-//         distributor:'嵩利民',
-//         status:'销售经理审核',
-//         id:'002'
-//     },{
-//         contract_num:'HBXD20180935BJ',
-//         customer_name:'安宁',
-//         project_name:'顺义别墅',
-//         distributor:'嵩利民',
-//         status:'销售经理审核',
-//         id:'003'
-//     }
-// ];

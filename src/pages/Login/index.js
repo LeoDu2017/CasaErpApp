@@ -28,11 +28,14 @@ class Screen extends Component {
     constructor(props){
         super(props);
         this.state = {
+            // username:'fyp',
             username:'ll',
+            // username:'gyh',
+            // username:'hz-xjz',
             password:md5.hex_md5('casa*2018')
         }
     };
-    static  navigationOptions = ({navigation, screenProps}) => ({
+    static  navigationOptions = () => ({
         header: null
     });
 

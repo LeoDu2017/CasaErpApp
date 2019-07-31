@@ -14,7 +14,7 @@ const login = (data) => {
                 alert(msg)
                 // dispatch(loginSuccess())
             }
-        }).catch((error) => {
+        }).catch(() => {
             dispatch(loginError(false))
         })
     }
@@ -26,14 +26,14 @@ function isLogining() {
     }
 }
 
-function loginSuccess(isSuccess, user) {
+function loginSuccess(user) {
     return {
         type: types.LOGIN_IN_DONE,
         user: user,
     }
 }
 
-function loginError(isSuccess) {
+function loginError() {
     return {
         type: types.LOGIN_IN_ERROR,
     }

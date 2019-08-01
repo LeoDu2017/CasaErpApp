@@ -1,6 +1,6 @@
 import {COAchievementScreen, CUAchievementScreen, QUAchievementScreen} from "./pages/Achievement";
 import LoginScreen from "./pages/Login";
-import {ADtails,MASearch, DAftersale, MAftersale} from "./pages/Aftersale";
+import {ADtails, DAftersale, MAftersale} from "./pages/Aftersale";
 import {ModifyPasswordScreen, ModifyPhoneScreen} from "./pages/Ucenter";
 import {
     DeDayReport, DeWeekReport,
@@ -61,7 +61,6 @@ const StackRouteConfigs = {
 
     LoginScreen: {screen: LoginScreen},
     'AftersaleSystem/My': { screen: MAftersale },
-    'AftersaleSystem/My/Search': { screen: MASearch },
     'AftersaleSystem/Details': { screen: ADtails },
     'AftersaleSystem/Department': { screen: DAftersale },
 

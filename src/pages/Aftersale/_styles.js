@@ -196,6 +196,25 @@ const styles = StyleSheet.create({
     filter_footer: {
         height: 42,
         flexDirection: 'row'
+    },
+    search_input: {
+        flex:1,
+        height:36,
+        fontSize: 14,
+        padding: 0,
+        alignSelf: 'center',
+    },
+    search_input_wrap:{
+        flex:1,
+        flexDirection:'row',
+        height:36,
+        padding: 0,
+        paddingLeft: 14,
+        paddingRight: 10,
+        backgroundColor:'#F5F5F5',
+        borderRadius: 18,
+        alignSelf: 'center',
+        justifyContent: 'space-between'
     }
 });
 export default styles

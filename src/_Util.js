@@ -55,7 +55,7 @@ export  class NavigationCustomBackMenu extends Component {
     }
 }
 
-export function  customNavigationOptions(navigation, headerRight){
+export function  customNavigationOptions(navigation, headerRight,headerLeft){
     return ({
         headerRight: (headerRight ? headerRight : <View/>),
         headerTitleStyle: {
@@ -68,7 +68,7 @@ export function  customNavigationOptions(navigation, headerRight){
         },
         headerTintColor: '#24292e',
         // headerBackImage: require('./assets/images/navigation/back.png'),
-        headerLeft: <NavigationCustomBackMenu nav={navigation}/>,
+        headerLeft: headerLeft || <NavigationCustomBackMenu nav={navigation}/>,
         headerStyle:{
             backgroundColor: '#fff'
         }

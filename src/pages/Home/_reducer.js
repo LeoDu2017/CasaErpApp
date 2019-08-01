@@ -88,7 +88,8 @@ const initialState = [
             {
                 icon: require('../../assets/images/home/myAfterSaleOrder_submit.png'),
                 name: '我的售后单',
-                path: 'AftersaleSystem/My'
+                path: 'AftersaleSystem/My',
+                params: {showHeaderTitle:false,showClear: false}
             }, {
                 icon: require('../../assets/images/home/departmentAfterSaleOrder.png'),
                 name: '部门售后单',

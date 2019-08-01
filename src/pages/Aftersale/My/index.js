@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Loading from '../_Component_loding_status'
 import SaleItem from '../_Component_item'
 import {bindActionCreators} from "redux";
@@ -13,20 +13,54 @@ import FilterComponent from '../../_Component_filter'
 class Screen extends Component {
     static  navigationOptions = ({navigation}) => ({
         title: '我的售后单',
-        ...customNavigationOptions(navigation,
-            <View style={{flexDirection: 'row', right: 14}}>
-                <TouchableOpacity
-                    style={{marginRight: 15}}
-                    onPress={() => navigation.state.params.showFilter('right')}>
-                    <Image style={{height: 20, width: 20}}
-                           source={require('../../../assets/images/navigation/nav_select.png')}/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => alert('search')}>
-                    <Image style={{height: 20, width: 20}}
-                           source={require('../../../assets/images/navigation/nav_search.png')}/>
-                </TouchableOpacity>
-            </View>
-        )
+        headerTitle: navigation.state.params.showHeaderTitle ?
+            <View style={styles.search_input_wrap}>
+                {
+                    [<TextInput
+                        key={'searchInput'}
+                        onChangeText={(value) => navigation.state.params.onInput(value)}
+                        value={navigation.state.params.value}
+                        placeholder='请输入客户姓名/合同号'
+                        placeholderColor='#CCCCCC'
+                        style={styles.search_input}/>,
+                        navigation.state.params.showClear ?
+                        <TouchableOpacity
+                            key={'searchClear'}
+                            onPress={()=>{navigation.state.params.onClear()}}
+                            style={{height: 28, width: 28,alignSelf: 'center'}}>
+                            <Image style={{height: 28, width: 28}}
+                                source={require('../../../assets/images/navigation/nav_close.png')}/>
+                        </TouchableOpacity> : null]
+                }
+            </View> : null ,
+            ...customNavigationOptions(navigation,
+                <View style={{flexDirection: 'row', right: 14}}>
+                    {
+                        !navigation.state.params.showHeaderTitle ? [<TouchableOpacity
+                            key={'filterIcon'}
+                            style={{marginRight: 15}}
+                            onPress={() => navigation.state.params.showFilter('right')}>
+                            <Image style={{height: 20, width: 20}}
+                                   source={require('../../../assets/images/navigation/nav_select.png')}/>
+                        </TouchableOpacity>,
+                        <TouchableOpacity
+                            key={'searchIcon'}
+                            onPress={() => navigation.state.params.toggleSearch(true)}>
+                            <Image style={{height: 20, width: 20}}
+                                   source={require('../../../assets/images/navigation/nav_search.png')}/>
+                        </TouchableOpacity>] : <TouchableOpacity
+                            onPress={() => navigation.state.params.onSearch()}>
+                            <Image style={{height: 20, width: 20}}
+                                   source={require('../../../assets/images/navigation/nav_search.png')}/>
+                        </TouchableOpacity>
+                    }
+                </View>,
+                (navigation.state.params.showHeaderTitle ? <TouchableOpacity
+                    onPress={()=>{navigation.state.params.onBack()}}>
+                    <Image style={{left: 12,height: 18, width: 12}}
+                           source={require('../../../assets/images/navigation/back.png')}/>
+                </TouchableOpacity> : null)
+            )
     });
 
     constructor(props) {
@@ -41,31 +75,70 @@ class Screen extends Component {
         }
     };
 
-    toggleMenu(side){
-        let { rootTransform,filterID} = this.state;
-        this.drawer = Drawer.open(this.renderDrawerMenu(filterID), side, rootTransform);
+    toggleMenu(side) {
+        let {rootTransform, filterID} = this.state;
+        this.drawer = Drawer.open(this.renderDrawerMenu(filterID), side, rootTransform)
+    };
 
-    };
-    onFilter(parameter){
+    onFilter(parameter) {
         const {init: {fetch_mine}} = this.props;
-        this.setState({parameter:{...parameter}});
-        fetch_mine({...this.state.parameter,...parameter});
+        this.setState({parameter: {...parameter}});
+        fetch_mine({...this.state.parameter, ...parameter});
     };
-    renderDrawerMenu(){
+
+    renderDrawerMenu() {
         return <FilterComponent
-                    onFilter={this.onFilter.bind(this)}
-                    onClose={()=>{this.drawer && this.drawer.close()}}
-                    filterType={{service_status: this.state.parameter.service_status}}
-                    filters={this.props.filters}/>
+            onFilter={this.onFilter.bind(this)}
+            onClose={() => {
+                this.drawer && this.drawer.close()
+            }}
+            filterType={{service_status: this.state.parameter.service_status}}
+            filters={this.props.filters}/>
     };
 
     componentDidMount(): void {
         const {init: {fetch_mine}} = this.props;
         fetch_mine(this.state.parameter);
         this.props.navigation.setParams({
-            showFilter: this.toggleMenu.bind(this)
+            showFilter: this.toggleMenu.bind(this),
+            toggleSearch: this.toggleSearch.bind(this),
+            onSearch: this.onSearch.bind(this),
+            onInput: this.setKeyword.bind(this),
+            onClear: this.onClear.bind(this),
+            value: this.state.parameter.keyword,
+            onBack: this.onBack.bind(this),
         });
-    }
+    };
+    onClear(){
+        this.props.navigation.setParams({
+            value: '',
+            showClear: false
+        })
+    };
+    toggleSearch(show) {
+        this.props.navigation.setParams({showHeaderTitle:show});
+    };
+    onSearch() {
+        const {init: {fetch_mine}} = this.props;
+        fetch_mine(this.state.parameter);
+    };
+    onBack(){
+        const {init: {fetch_mine}} = this.props;
+        this.toggleSearch(false);
+
+        fetch_mine();
+    };
+    setKeyword(keyword) {
+        this.setState({
+            parameter: {...this.state.parameter, keyword}
+        });
+        this.props.navigation.setParams({
+            value: keyword,
+            showClear: keyword.length > 1
+        })
+    };
+
+
 
     render() {
         const {navigation: {navigate}, sales, status, AfterSaleStatusList, isSuccess} = this.props;
@@ -99,7 +172,7 @@ class Screen extends Component {
 }
 
 export default connect(
-    ({MAftersale: {sales, status, AfterSaleStatusList,filters, isSuccess}}) => {
+    ({MAftersale: {sales, status, AfterSaleStatusList, filters, isSuccess}}) => {
         return ({
             sales,
             AfterSaleStatusList,

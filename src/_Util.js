@@ -40,7 +40,7 @@ export class NavigationCustomBackMenu extends Component {
             <TouchableOpacity
                 style={{ width: 40, height: 40, justifyContent: 'center', alignItems: 'center' }}
                 onPress={() => { goBack()}}>
-                <Image style={wright ? styles.large : styles.image}
+                <Image style={white ? styles.large : styles.image}
                     resizeMode='stretch'
                     source={
                         white ?

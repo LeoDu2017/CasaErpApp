@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Dimensions} from 'react-native';
 export default ({edit,title,onChange,data,name}) =>
     <View style={styles.report_data_item}>
         <Text style={styles.report_data_text}>{title}</Text>
@@ -17,6 +17,7 @@ export default ({edit,title,onChange,data,name}) =>
             </Text>
         }
     </View>;
+const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
     report_data_item:{
         display: 'flex',

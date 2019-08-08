@@ -1,133 +1,31 @@
-import React, {Component, Fragment} from 'react';
-import {
-    View,
-    ScrollView,
-    StyleSheet,
-    Text, TouchableOpacity, Image
-} from 'react-native';
-import ReportItem from "../../_Component_item";
-import {customNavigationOptions} from "../../../../_Util";
+import React from 'react';
+import {connect} from 'react-redux';
+import ReportItem from "../../_Component_Week_item";
+import Container from '../../../../container/FilterAndAddNav'
+import List from "../../../_Component_refresh_list";
+import {bindActionCreators} from "redux";
+import Actions from "./_actions";
 
-
-const mock = [
-    {
-        date: '2018.11.01-11.07  第一周',
-        data: [
-            {id: '11',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-                name: '周星星'
-            },{id: '12',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-                name: '李星星'
-            }, {id: '13',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-                name: '王星星'
-            }
-        ]
-    }, {
-        date: '2018.11.08-11.14  第二周',
-        data: [
-            {id: '21',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-                name: '周星星'
-            },{id: '22',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-                name: '李星星'
-            }, {id: '23',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-                name: '王星星'
-            }
-        ]
-    }, {
-        date: '2018.11.15-11.21  第三周',
-        data: [
-            {id: '31',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-                name: '周星星'
-            },{id: '32',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-                name: '李星星'
-            }, {id: '33',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-                name: '王星星'
-            }
-        ]
-    }
-];
-
-class DeReport extends Component {
-    static  navigationOptions = ({navigation}) => ({
-        title: '我的周报',
-        ...customNavigationOptions(navigation,
-        <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('ReportSystem/Week/MyReportDetail', {id: 0})}>
-        <Image style={{height: 20, width: 20}}
-               source={require('../../../../assets/images/report/new.png')}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => alert('filter')}>
-        <Image style={{height: 20, width: 20}}
-        source={require('../../../../assets/images/report/nav_select.png')}/>
-        </TouchableOpacity>
-        </View>
-        )
-    });
-     constructor(props) {
-        super(props);
-    };
-    render() {
-        const {navigate} = this.props.navigation;
-        //
-        return (
-            <Fragment>
-                <ScrollView style={{flex: 1}}>
-                    {
-                        mock.map(item =>
-                            <ReportItem
-                                {...item}
-                                key={item.id}
-                                onNav={navigate}
-                                url='ReportSystem/Week/MyReportDetail'>
-                                <View style={styles.button}>
-                                    <Text style={styles.text}>批复</Text>
-                                </View>
-                            </ReportItem>
-                        )
-                    }
-                </ScrollView>
-            </Fragment>
-        )
-    }
-}
-
-const styles = StyleSheet.create({
-    nav_right: {
-        flexDirection: 'row',
-    },
-    icon: {
-        height: 20,
-        width: 20,
-    },
-    button:{
-        height: 30,
-        width: 90,
-        backgroundColor: '#3496FB',
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        borderRadius: 4
-    },
-    text:{
-        color: '#fff',
-        fontSize: 16
-    }
+const RenderList = ({DWReport:{reports}, navigation: {navigate}, init: {fetch_data}, ...rest})=>{
+    return  <List
+        {...rest}
+        Cell={ReportItem}
+        dataList={reports}
+        onNav={navigate}
+        fetchData={fetch_data}/>
+};
+const Screen = Container({
+    title:'部门周报',
+    RenderList,
+    showAdd: false
 });
-export default DeReport
+
+export default connect(
+    ({DWReport})=>({
+        DWReport,
+        url:'ReportSystem/Week/MyReportDetail'
+    }),
+    (dispatch) => ({
+        init: bindActionCreators(Actions, dispatch)
+    })
+)(Screen)

@@ -1839,7 +1839,7 @@ create-react-class@15.6.0:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-create-react-class@^15.6.3:
+create-react-class@^15.6.2, create-react-class@^15.6.3:
   version "15.6.3"
   resolved "https://registry.npm.taobao.org/create-react-class/download/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   integrity sha1-LXMjf7P5cK5uvgEanmb0bbyoADY=
@@ -4219,6 +4219,11 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+moment@^2.22.0:
+  version "2.24.0"
+  resolved "https://registry.npm.taobao.org/moment/download/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha1-DQVdU/UFKqZTyfbraLtdEr9cK1s=
+
 morgan@^1.9.0:
   version "1.9.1"
   resolved "https://registry.npm.taobao.org/morgan/download/morgan-1.9.1.tgz#0a8d16734a1d9afbc824b99df87e738e58e2da59"
@@ -4863,7 +4868,7 @@ prompts@^2.0.1:
     kleur "^3.0.2"
     sisteransi "^1.0.0"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -4961,6 +4966,13 @@ react-native-chart-kit@^3.1.0:
     paths-js "^0.4.7"
     point-in-polygon "^1.0.1"
 
+react-native-datepicker@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.npm.taobao.org/react-native-datepicker/download/react-native-datepicker-1.7.2.tgz#58d0822591a0ac9b32aba082650222a0ee29669d"
+  integrity sha1-WNCCJZGgrJsyq6CCZQIioO4pZp0=
+  dependencies:
+    moment "^2.22.0"
+
 "react-native-deprecated-custom-components@github:facebookarchive/react-native-custom-components":
   version "0.1.1"
   resolved "https://codeload.github.com/facebookarchive/react-native-custom-components/tar.gz/d5201e53221a2460b096ee82ff4480f3b0de7fe4"
@@ -4972,13 +4984,12 @@ react-native-chart-kit@^3.1.0:
     react-timer-mixin "^0.13.2"
     rebound "^0.0.13"
 
-react-native-drawer@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.npm.taobao.org/react-native-drawer/download/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
-  integrity sha1-CLkxQYT0jHJPG0Z/iFl5c2l5hlQ=
+react-native-easy-toast@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/react-native-easy-toast/download/react-native-easy-toast-1.2.0.tgz#0f70bcb99e3306cda4800c244bfb4a67d42276ed"
+  integrity sha1-D3C8uZ4zBs2kgAwkS/tKZ9Qidu0=
   dependencies:
-    prop-types "^15.5.8"
-    tween-functions "^1.0.1"
+    prop-types "^15.5.10"
 
 react-native-flexi-radio-button@^0.2.2:
   version "0.2.2"
@@ -4999,6 +5010,16 @@ react-native-md5@^1.0.0:
   resolved "https://registry.npm.taobao.org/react-native-md5/download/react-native-md5-1.0.0.tgz#2320be24d674938ae5ef4f492698edbbfa0e0205"
   integrity sha1-IyC+JNZ0k4rl709JJpjtu/oOAgU=
 
+react-native-picker@^4.3.7:
+  version "4.3.7"
+  resolved "https://registry.npm.taobao.org/react-native-picker/download/react-native-picker-4.3.7.tgz#9842e8c62ff0d8b676e9514d9f9172413c0518a8"
+  integrity sha1-mELoxi/w2LZ26VFNn5FyQTwFGKg=
+
+react-native-refresh-list-view@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.npm.taobao.org/react-native-refresh-list-view/download/react-native-refresh-list-view-1.0.10.tgz#4f801e8526f9028d4273f04283506f7a1eda8a0b"
+  integrity sha1-T4AehSb5Ao1Cc/BCg1Bveh7aigs=
+
 react-native-safe-area-view@^0.14.1:
   version "0.14.6"
   resolved "https://registry.npm.taobao.org/react-native-safe-area-view/download/react-native-safe-area-view-0.14.6.tgz?cache=0&sync_timestamp=1562164292655&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-native-safe-area-view%2Fdownload%2Freact-native-safe-area-view-0.14.6.tgz#9a9d37d9f8f3887d60c4076eae7b5d2319539446"
@@ -5013,10 +5034,26 @@ react-native-safe-area-view@^0.14.1:
   dependencies:
     debounce "^1.2.0"
 
+react-native-scrollable-tab-view@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.npm.taobao.org/react-native-scrollable-tab-view/download/react-native-scrollable-tab-view-0.10.0.tgz#8ce7908254685ee37d35df7d849676eaa1e81132"
+  integrity sha1-jOeQglRoXuN9Nd99hJZ26qHoETI=
+  dependencies:
+    create-react-class "^15.6.2"
+    prop-types "^15.6.0"
+    react-timer-mixin "^0.13.3"
+
 react-native-svg@^9.5.3:
   version "9.5.3"
   resolved "https://registry.npm.taobao.org/react-native-svg/download/react-native-svg-9.5.3.tgz#2389f3ffd700c6441166496a1aeade31ead89c59"
   integrity sha1-I4nz/9cAxkQRZklqGureMerYnFk=
+
+react-native-swiper@^1.5.14:
+  version "1.5.14"
+  resolved "https://registry.npm.taobao.org/react-native-swiper/download/react-native-swiper-1.5.14.tgz#1c6f949ca377186300f972bb0f30d24062c899aa"
+  integrity sha1-HG+UnKN3GGMA+XK7DzDSQGLImao=
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
   version "1.4.1"
@@ -5130,7 +5167,7 @@ react-test-renderer@16.8.6:
     react-is "^16.8.6"
     scheduler "^0.13.6"
 
-react-timer-mixin@^0.13.2:
+react-timer-mixin@^0.13.2, react-timer-mixin@^0.13.3:
   version "0.13.4"
   resolved "https://registry.npm.taobao.org/react-timer-mixin/download/react-timer-mixin-0.13.4.tgz#75a00c3c94c13abe29b43d63b4c65a88fc8264d3"
   integrity sha1-daAMPJTBOr4ptD1jtMZaiPyCZNM=
@@ -5211,6 +5248,11 @@ rebound@^0.0.13:
   version "0.0.13"
   resolved "https://registry.npm.taobao.org/rebound/download/rebound-0.0.13.tgz#4a225254caf7da756797b19c5817bf7a7941fac1"
   integrity sha1-SiJSVMr32nVnl7GcWBe/enlB+sE=
+
+redux-devtools-extension@^2.13.8:
+  version "2.13.8"
+  resolved "https://registry.npm.taobao.org/redux-devtools-extension/download/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
+  integrity sha1-N7mCaIYm5eSZP/hyIMm7t80tluE=
 
 redux-thunk@^2.3.0:
   version "2.3.0"
@@ -6047,11 +6089,6 @@ tunnel-agent@^0.6.0:
   integrity sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0=
   dependencies:
     safe-buffer "^5.0.1"
-
-tween-functions@^1.0.1:
-  version "1.2.0"
-  resolved "https://registry.npm.taobao.org/tween-functions/download/tween-functions-1.2.0.tgz#1ae3a50e7c60bb3def774eac707acbca73bbc3ff"
-  integrity sha1-GuOlDnxguz3vd06scHrLynO7w/8=
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"

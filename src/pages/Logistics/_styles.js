@@ -4,11 +4,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        // justifyContent: 'center'
+        backgroundColor:'#EBEFF2',
     },
-    banner:{
-        width,
-        height: 200
-    }
 });
+
 export default styles

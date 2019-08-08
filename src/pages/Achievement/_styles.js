@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
     Swiper_wrapper:{
         width,
         flex: 1,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        paddingVertical: 30
     }
 });
 export default styles

@@ -1,5 +1,5 @@
 import {LOADING_AFTERSALE,SET_DETAIL} from "./_actionTypes";
-import {Aftersale_fetch_detail} from "../../../_Service";
+import {Aftersale_fetch_detail,Aftersale_post_my_handle} from "../../../_Service";
 
 const fetch_detail = (data) => {
     return (dispatch) => {
@@ -15,7 +15,17 @@ const fetch_detail = (data) => {
         ).catch()
     }
 };
-
+const post_handle = (data,callBack) => {
+    return (dispatch) => {
+        Aftersale_post_my_handle(data).then(
+            ({status})=>{
+                if(status){
+                    callBack()
+                }
+            }
+        ).catch()
+    }
+};
 function doing(){
     return {
         type: LOADING_AFTERSALE
@@ -29,5 +39,6 @@ function setDetail(data){
     }
 }
 export default {
-    fetch_detail
+    fetch_detail,
+    post_handle
 }

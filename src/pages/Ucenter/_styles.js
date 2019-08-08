@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     user_name: {
-        color: '#005068',
+        color: '#000',
         fontSize: 20,
         lineHeight: 30
     },
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     content_wrap_2_item: {
         borderBottomWidth: .5,
         borderColor: '#e1e1e1',
-        height: 60,
+        height: 42,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         justifyContent:'flex-end'
     },
     drawer_container:{
-        height: 200,
+        height: 160,
         width: '100%',
         backgroundColor:'#fff'
     },

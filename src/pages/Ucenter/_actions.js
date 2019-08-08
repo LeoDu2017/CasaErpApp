@@ -1,28 +1,52 @@
-import {MODIFY_PASSWORD,MODIFY_PHONE} from "./_actionTypes";
+import {MODIFY_PASSWORD,MODIFY_PHONE,FETCH_USER_DATA,SET_USER_DATA} from "./_actionTypes";
+import {Ucenter_fetch_info,Ucenter_update_password,Ucenter_update_mobile} from "../../_Service";
 
-const modifyPwd = (value) => {
-    return dispatch => {
-        // 模拟用户登录
-        let result = fetch('https://www.baidu.com/')
-            .then((res) => {
-                console.log(value)
-            }).catch((e) => {
-
-            })
+const fetch_data = () => {
+    return (dispatch) => {
+        Ucenter_fetch_info().then(
+            ({data,msg,status})=>{
+                if(status){
+                    dispatch(set_user_info(data))
+                }
+            }
+        ).catch()
     }
 };
-const modifyPhone = (value) => {
-    return dispatch => {
-        // 模拟用户登录
-        let result = fetch('https://www.baidu.com/')
-            .then((res) => {
-                console.log(value)
-            }).catch((e) => {
-
-            })
+const update_password = (data,succssCallback=null,failCallback=null) => {
+    return (dispatch) => {
+        Ucenter_update_password(data).then(
+            ({data,msg,status})=>{
+                if(status){
+                    dispatch(()=>{succssCallback && succssCallback()})
+                }else{
+                    dispatch(()=>{failCallback && failCallback(msg)})
+                }
+            }
+        ).catch()
     }
 };
+const update_mobile = (data,succssCallback=null,failCallback=null) => {
+    return (dispatch) => {
+        Ucenter_update_mobile(data).then(
+            ({data,msg,status})=>{
+                if(status){
+                    dispatch(()=>{succssCallback && succssCallback()})
+                }else{
+                    dispatch(()=>{failCallback && failCallback(msg)})
+                }
+            }
+        ).catch()
+    }
+};
+function set_user_info(data){
+    return {
+        type:SET_USER_DATA,
+        payload: data
+    }
+}
+
 export default{
-    modifyPwd,
-    modifyPhone
+    fetch_data,
+    update_password,
+    update_mobile
 }

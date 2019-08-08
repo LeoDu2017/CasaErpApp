@@ -1,48 +1,26 @@
-import {LOADING_REPORTS,LOADING_SUCCESS,LOADING_ERROR} from './_actionTypes'
+import {LOADING_REPORTS,LOADING_SUCCESS,LOADING_ERROR,SET_REPORTS} from './_actionTypes'
+import {Report_fetch_mine} from "../../../../_Service";
 
-// 模拟日报列表信息
-const reports = [
-    {
-        id:'01',
-        date: '2018.11.29',
-        data: [
-            {id: '11',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-            }
-        ]
-    }, {
-        id:'02',
-        date: '2018.11.30',
-        data: [
-            {id: '21',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-            }
-        ]
-    }, {
-        id:'03',
-        date: '2018.11.31',
-        data: [
-            {   id: '31',
-                title: '工作汇报',
-                info: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发、双人沙发、长形沙发和圆形沙发等。意大利之家原装进口欧洲的沙发.',
-            }
-        ]
-    }
-];
-
-const load = () => {
+const fetch_data = (data,successCallback=null,failCallback=null) => {
     return (dispatch) => {
-        dispatch(doing());
-        let result = fetch('https://www.baidu.com/')
-            .then((res) => {
-                dispatch(success(true, reports)); // 登录请求完成
-            }).catch((e) => {
-                dispatch(error(false)); // 登录请求出错
-            })
+        Report_fetch_mine(data).then(
+            ({status,data,msg}) => {
+                if(status === 1){
+                    dispatch(set_reports(data));
+                    dispatch(()=>{successCallback && successCallback(data)})
+                }else{
+                    dispatch(()=>{failCallback && failCallback(status)})
+                }
+            }
+        ).catch()
     }
 };
+function set_reports(reports){
+    return {
+        type : SET_REPORTS,
+        payload: {reports}
+    }
+}
 function doing(){
     return {
         type : LOADING_REPORTS
@@ -51,7 +29,6 @@ function doing(){
 function success(){
     return {
         type : LOADING_SUCCESS,
-        reports
     }
 }
 function error(){
@@ -60,5 +37,5 @@ function error(){
     }
 }
 export default{
-    load
+    fetch_data
 }

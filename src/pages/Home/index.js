@@ -28,6 +28,12 @@ class Page extends Component{
             //!IOS && StatusBar.setBackgroundColor('#6a51ae');
         })
     };
+
+    componentDidMount() {
+        const { actions: { getMenu } } = this.props;
+        getMenu()
+    }
+
     render(){
         const {Menus,navigation:{navigate}} = this.props;
         const length = Menus.length - 1;
@@ -58,7 +64,7 @@ class Page extends Component{
 }
 
 export default connect(
-    ({Menus}) => {
+    ({Menus: { Menus }}) => {
         return {
             Menus
         }

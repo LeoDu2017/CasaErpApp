@@ -36,7 +36,7 @@ const fetch_customs = (year) => {
       })
   }
 };
-function update_customs(year){
+function update_data(year){
     return (dispatch) => {
         dispatch(doing());
         dispatch(fetch_customs(year));
@@ -66,5 +66,5 @@ function set_custom(data) {
 }
 export default{
     fetch_years,
-    update_customs
+    update_data
 }

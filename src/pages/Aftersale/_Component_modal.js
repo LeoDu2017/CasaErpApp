@@ -31,10 +31,7 @@ class CustomModal extends Component{
                             </TouchableOpacity>
                             <Text style={styles.space}> </Text>
                             <TouchableOpacity
-                                onPress={() => {
-                                    this.setModalVisible(!this.state.visible);
-                                }}
-                            >
+                                onPress={() => {this.props.onOk()}}>
                                 <Text style={styles.ok_btn}>确认</Text>
                             </TouchableOpacity>
                         </View>

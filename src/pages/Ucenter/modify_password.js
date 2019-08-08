@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Toast from 'react-native-easy-toast'
 import {
     View,
     Text,
@@ -11,6 +12,7 @@ import actions from './_actions'
 import styles from './_styles'
 import {bindActionCreators} from 'redux'
 import {customNavigationOptions} from "../../_Util";
+import md5 from "react-native-md5"
 
 class Index extends Component {
     static  navigationOptions = ({navigation}) => ({
@@ -20,8 +22,8 @@ class Index extends Component {
     constructor(pops) {
         super(pops);
         this.state = {
-            origin_pwd: '',
-            new_pwd: ''
+            old_password: '',
+            new_password: ''
         };
         this._navListener = this.props.navigation.addListener('didFocus', (nav) => {
             StatusBar.setBackgroundColor('#fff');
@@ -34,13 +36,21 @@ class Index extends Component {
 
     };
     onSubmit() {
-        const { origin_pwd, new_pwd } = this.state;
-        if(origin_pwd === '' || new_pwd === '') {
-            alert('请填写完整');
-        } else {
-            const {ucenterAction} = this.props;
-            ucenterAction.modifyPwd(this.state)
-            // this.props.navigation.push('Home');
+        const { old_password, new_password } = this.state;
+        if(old_password === '') {
+            this.refs.toast.show('请填写原密码');
+        }else if(new_password === ''){
+            this.refs.toast.show('请填写新密码');
+        }else {
+            const {init} = this.props;
+            init.update_password({
+                old_password: md5.hex_md5(old_password),
+                new_password: md5.hex_md5(new_password)
+            },()=>{
+                this.props.navigation.push('Home')
+            },(msg)=>{
+                this.refs.toast.show(msg);
+            })
         }
     }
     render() {
@@ -57,8 +67,8 @@ class Index extends Component {
                             autoFocus={true}
                             secureTextEntry={true}
                             placeholder='请输入原密码'
-                            onChangeText={(origin_pwd) =>this.setState({ origin_pwd })}
-                            value={this.state.origin_pwd}
+                            onChangeText={(old_password) =>this.setState({ old_password })}
+                            value={this.state.old_password}
                         />
                     </View>
                     <View style={styles.input_wrap}>
@@ -69,8 +79,8 @@ class Index extends Component {
                             clearTextOnFocus={true}
                             secureTextEntry={true}
                             placeholder='请输入新密码'
-                            onChangeText={(new_pwd) =>this.setState({new_pwd })}
-                            value={this.state.new_pwd}
+                            onChangeText={(new_password) =>this.setState({new_password })}
+                            value={this.state.new_password}
                         />
                     </View>
                 </View>
@@ -79,14 +89,15 @@ class Index extends Component {
                         <Text style={styles.buttonText}>提交</Text>
                     </TouchableOpacity>
                 </View>
+                <Toast
+                    position='top'
+                    style={{backgroundColor:'rgba(0,0,0,.5)'}}
+                    ref="toast"/>
             </View>
         )
     }
-    // componentWillUnmount(): void {
-    //     this._navListener.remove();
-    // };
 }
 
 export default connect(null, (dispatch)=>({
-    ucenterAction:bindActionCreators(actions,dispatch)
+    init:bindActionCreators(actions,dispatch)
 }))(Index);

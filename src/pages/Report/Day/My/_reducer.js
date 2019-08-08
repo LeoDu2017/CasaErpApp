@@ -1,11 +1,11 @@
 'use strict';
-import {LOADING_REPORTS,LOADING_SUCCESS,LOADING_ERROR} from "./_actionTypes";
+import {LOADING_REPORTS,LOADING_SUCCESS,LOADING_ERROR,SET_REPORTS} from "./_actionTypes";
 import {createReducer} from '../../../../_Util'
 
 const initialState = {
     status:'加载列表',
     isSuccess:false,
-    reports:null
+    reports:[]
 };
 const actionHandler = {
     [LOADING_REPORTS]:(state,action) => {
@@ -19,6 +19,13 @@ const actionHandler = {
             ...state,
             isSuccess: true,
             reports: action.reports,
+        }
+    },
+    [SET_REPORTS]:(state,action) => {
+        const {reports} = action.payload;
+        return{
+            ...state,
+            reports:[...state.reports,...reports]
         }
     },
     [LOADING_ERROR]:(state,action) => {

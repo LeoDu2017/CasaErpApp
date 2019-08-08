@@ -1,12 +1,18 @@
+// 业绩系统
 import {COAchievementScreen, CUAchievementScreen, QUAchievementScreen} from "./pages/Achievement";
 import LoginScreen from "./pages/Login";
+// 售后系统
 import {ADtails, DAftersale, MAftersale} from "./pages/Aftersale";
+// 物流系统
+import {LDtails, DLogistics, MLogistics} from "./pages/Logistics";
+// 个人中心
 import {ModifyPasswordScreen, ModifyPhoneScreen} from "./pages/Ucenter";
+// 日报系统
 import {
-    DeDayReport, DeWeekReport,
+    DeDayReport,
+    DeWeekReport,
     MyDayReport,
     MyDayReportDetail,
-    MyDayReportNew,
     MyWeekReport,
     MyWeekReportDetail
 } from "./pages/Report";
@@ -20,7 +26,8 @@ import {
     Invoice,
     InvoiceDetails,
     ContractApproval,
-    ContractApprovalDetails
+    ContractApprovalDetails,
+    Review
 } from './pages/Review';
 // 客户系统
 import {
@@ -33,6 +40,7 @@ import {
     MyClient,
     MyClientDetails,
     ClientEdit,
+    FollowList,
     ADDFollow,
     UpdataImg
 } from './pages/client';
@@ -55,14 +63,19 @@ import {
     DepartmentChangeOrder,
     DepartmentChangeOrderDetails
 } from './pages/OrderQuota';
+import search from './pages/Search'
 
 
 const StackRouteConfigs = {
-
     LoginScreen: {screen: LoginScreen},
+    'Search': {screen: search},
     'AftersaleSystem/My': { screen: MAftersale },
     'AftersaleSystem/Details': { screen: ADtails },
     'AftersaleSystem/Department': { screen: DAftersale },
+
+    'LogisticsSystem/My': { screen: MLogistics },
+    'LogisticsSystem/Details': { screen: LDtails },
+    'LogisticsSystem/Department': { screen: DLogistics },
 
     'Ucenter/ModifyPassword': { screen: ModifyPasswordScreen },
     'Ucenter/ModifyPhone': { screen: ModifyPhoneScreen },
@@ -70,7 +83,7 @@ const StackRouteConfigs = {
     'ReportSystem/Day/MyReport': { screen: MyDayReport },
     'ReportSystem/Day/DeReport': { screen: DeDayReport },
     'ReportSystem/Day/MyReportDetail': { screen: MyDayReportDetail },
-    'ReportSystem/Day/New/MyReport': { screen: MyDayReportNew },
+
     'ReportSystem/Week/MyReport': { screen: MyWeekReport },
     'ReportSystem/Week/MyReportDetail': { screen: MyWeekReportDetail },
     'ReportSystem/Week/DeReport': { screen: DeWeekReport },
@@ -87,6 +100,7 @@ const StackRouteConfigs = {
     'Review/Invoice/Details':{ screen: InvoiceDetails },
     'Review/ContractApproval':{ screen: ContractApproval },
     'Review/ContractApproval/Details':{ screen: ContractApprovalDetails },
+    'Review/Order/Review':{ screen: Review },
 
     'Client/MyFollow':{ screen: MyFollow },
     'Client/MyFollow/Details':{ screen: MyFollowDetails },
@@ -97,6 +111,7 @@ const StackRouteConfigs = {
     'Client/MyClient':{ screen: MyClient },
     'Client/MyClient/Details':{ screen: MyClientDetails },
     'Client/MyClient/Edit':{ screen: ClientEdit },
+    'Client/MyClient/FollowList':{ screen: FollowList },
     'Client/MyClient/ADDFollow':{ screen: ADDFollow },
     'Client/MyClient/UpdataImg':{ screen: UpdataImg },
 

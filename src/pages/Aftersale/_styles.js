@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: '#f2f2f2'
-        // justifyContent: 'center'
     },
     item: {
         backgroundColor: '#fff',
@@ -34,6 +33,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+
     _left: {
         color: '#333'
     },
@@ -214,7 +214,39 @@ const styles = StyleSheet.create({
         backgroundColor:'#F5F5F5',
         borderRadius: 18,
         alignSelf: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+    },
+    handle_wrap:{
+        marginTop: 10,
+        backgroundColor: '#fff',
+        padding: 15,
+    },
+    texteara_box:{
+        marginTop:10,
+    },
+    texteara:{
+        paddingVertical: 0,
+    },
+    submit_button:{
+        width:90,
+        height:30,
+        borderRadius: 4,
+        backgroundColor:'#3496FB',
+        alignSelf:'flex-end',
+        justifyContent:'center',
+        alignItems: 'center',
+        marginTop: 10
+    },
+    textarea_wrapper:{
+        minHeight:92,
+        padding: 5,
+        borderColor:'#ccc',
+        borderWidth:1
+    },
+    logs:{
+        marginTop: 10,
+        backgroundColor: '#fff',
+        padding: 15,
     }
 });
 export default styles

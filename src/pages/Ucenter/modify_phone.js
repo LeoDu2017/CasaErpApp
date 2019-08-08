@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import actions from "./_actions";
 import {customNavigationOptions} from "../../_Util";
-
+import Toast from 'react-native-easy-toast'
 
 
 class Index extends Component {
@@ -22,7 +22,7 @@ class Index extends Component {
     constructor(pops) {
         super(pops);
         this.state = {
-            phone_num: ''
+            mobile_number: ''
         };
         this._navListener = this.props.navigation.addListener('didFocus', (nav) => {
             StatusBar.setBackgroundColor('#fff');
@@ -35,13 +35,16 @@ class Index extends Component {
 
     };
     onSubmit() {
-        const { phone_num } = this.state;
-        if(phone_num === '') {
-            alert('请输入你的心手机号码');
+        const { mobile_number } = this.state;
+        if(mobile_number === '') {
+            this.refs.toast.show('请输入你的心手机号码');
         } else {
-            const {ucenterAction} = this.props;
-            ucenterAction.modifyPhone(this.state)
-            // this.props.navigation.navigate('Home');
+            const {init:{update_mobile}} = this.props;
+            update_mobile(this.state,()=>{
+                this.props.navigation.navigate('Home')
+            },(msg)=>{
+                this.refs.toast.show(msg);
+            })
         }
     }
     render() {
@@ -65,6 +68,10 @@ class Index extends Component {
                         <Text style={styles.buttonText}>提交</Text>
                     </TouchableOpacity>
                 </View>
+                <Toast
+                    position='top'
+                    style={{backgroundColor:'rgba(0,0,0,.5)'}}
+                    ref="toast"/>
             </View>
         )
     }
@@ -76,5 +83,5 @@ class Index extends Component {
 
 
 export default connect(null,(dispatch) => ({
-    ucenterAction:bindActionCreators(actions,dispatch)
+    init:bindActionCreators(actions,dispatch)
 }))(Index);

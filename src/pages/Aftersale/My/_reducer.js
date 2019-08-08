@@ -5,14 +5,15 @@ import {
     LOADING_ERROR,
     SET_MINE,
     SET_STATUS,
-    SET_FILTERS
+    SET_FILTERS,
+    CLEAR_MINE
 } from "./_actionTypes";
 import {createReducer} from '../../../_Util'
 
 const initialState = {
     status:'加载列表',
     isSuccess:false,
-    sales:null,
+    sales: [],
     AfterSaleStatusList:[],
     filters:[]
 };
@@ -36,10 +37,10 @@ const actionHandler = {
             status:'列表加载失败，请稍后重试...'
         }
     },
-    [SET_MINE]:(state,{payload}) => {
+    [SET_MINE]:(state,{payload:{sales}}) => {
         return {
             ...state,
-            ...payload
+            sales: [...state.sales,...sales]
         }
     },
     [SET_STATUS]:(state,{payload:{data}}) => {
@@ -54,6 +55,12 @@ const actionHandler = {
             filters:[...data]
         }
     },
+    [CLEAR_MINE]:(state) => {
+        return {
+            ...state,
+            sales:[]
+        }
+    }
 };
 
 export default createReducer(initialState,actionHandler)

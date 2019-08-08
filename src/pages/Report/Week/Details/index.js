@@ -3,53 +3,33 @@ import {View, Text, StyleSheet, Dimensions, ScrollView, TouchableOpacity} from '
 import ReportInput from '../../_Component_input'
 import ReportTexteara from '../../_Component_texteara'
 import {customNavigationOptions} from "../../../../_Util";
-const {width} = Dimensions.get('window');
-const mock = {
-    report_data: [
-        {
-            title: '分配数',
-            data: '1000',
-        },{
-            title: '有效数',
-            data: '800',
-        },{
-            title: '拜访数',
-            data: '120',
-        },{
-            title: '到店数',
-            data: '200',
-        }
-    ],
-    report_work_content: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.',
-    report_demand:'沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.'
-};
-const mock1 = {
-    report_data: [
-        {
-            title: '分配数',
-            data: '',
-        },{
-            title: '有效数',
-            data: '',
-        },{
-            title: '拜访数',
-            data: '',
-        },{
-            title: '到店数',
-            data: '',
-        }
-    ],
-    report_work_content: '',
-    report_demand:'',
-};
-class MyReportDetail extends Component{
+import {connect} from 'react-redux';
+import Actions from "./_actions";
+import {bindActionCreators} from "redux";
+import TabNavigation from '../../../_Component_Tabs'
+
+
+
+const {width,height} = Dimensions.get('window');
+
+class Screen extends Component{
     static  navigationOptions = ({navigation}) => ({
         title: navigation.state.params.id ? '周报详情' : '添加周报',
         ...customNavigationOptions(navigation,
-        <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.state.params.navigatePress()}>
-        <Text>{navigation.state.params.edit ? '完成' : '编辑'}</Text>
-        </TouchableOpacity>
+        <View style={{flexDirection: 'row',right:14}}>
+            {
+                !navigation.state.params.show ?
+                <TouchableOpacity onPress={() => navigation.state.params.navigatePress()}>
+                    {
+                        navigation.state.params.edit ?
+                            <Text>完成</Text> :
+                            <Text style={{color:'#3496FB'}}>编辑</Text>
+                    }
+
+                </TouchableOpacity> :  <TouchableOpacity onPress={() => navigation.state.params.Reply()}>
+                        <Text style={{color:'#3496FB'}}>批复</Text>
+                    </TouchableOpacity>
+            }
         </View>
         )
     });
@@ -59,8 +39,7 @@ class MyReportDetail extends Component{
         this.state = {
             id,
             edit: !id,
-            date: '2018.11.01-11.07  第一周',
-            name: '星星'
+            fixed: false
         }
     };
     setEdit(){
@@ -71,87 +50,127 @@ class MyReportDetail extends Component{
     componentDidMount(){
         this.props.navigation.setParams({
             edit: this.state.edit,
-            navigatePress: this.setEdit.bind(this)
-        })
+            navigatePress: this.setEdit.bind(this),
+            Reply:()=>{}
+        });
+        const {init:{fetch_data}}=this.props;
+        const { params:{id}} = this.props.navigation.state;
+        fetch_data({id})
     };
     onChange(value){
         alert(value)
-        // this.setState({
-        //
-        // })
     };
+    // onMove(e){
+    //     let top = e.nativeEvent.contentOffset.y;
+    //     this.setState({fixed: top > 292})
+    // };
     render(){
-        return(
-            <ScrollView>
-                <View style={styles.report_data}>
-                    <View style={styles.report_date}>
-                        <Text style={styles.report_date_text}>
-                            汇报人: {this.state.name}
-                        </Text>
-                        <Text style={styles.report_date_text}>
-                            {this.state.date}
-                        </Text>
-                    </View>
+        const {details, details:{ id,add_user,report_week_msg}} = this.props;
+        const input_titles = {
+            report_ddsl: '到店数',
+            report_bfsl:'拜访数',
+            report_fpsl:'分配数',
+            report_yxsl:'有效数'
+        };
+        const texteara_titles = {
+            report_gzwt: '工作遇到的问题',
+            report_gsjy: '对公司的建议',
+            report_shkn: '生活中的困难',
+            report_gzhz: '本周工作汇总',
+            report_gzjh: '下周工作计划',
+            report_khlx: '面谈客户类型',
+            report_qtsy: '见面浅谈事宜'
+        };
+        const { params:{show}} = this.props.navigation.state;
 
-                    <View style={styles.report_title}>
-                        <Text style={styles.font16}>客户统计</Text>
-                    </View>
+        const ScreenList = () => {
+            return [
+                {
+                    tabName: '汇报内容',
+                    screen:
+                        <View style={{
+                            backgroundColor:'#fff',
+                            padding: 15,
+                            flex:1}}>
+                            {
+                                Object.keys(texteara_titles).map(key=>
+                                    <ReportTexteara
+                                        key={key}
+                                        subtitle= {texteara_titles[key]}
+                                        edit={this.state.edit}
+                                        data={details[key]}/>)
+                            }
+                        </View>
+                }, {
+                    tabName: '批复内容',
+                    screen: <View style={{width}}><Text>
+                        批复内容
+                    </Text></View>
+                }
+            ]
+        };
+        return(<ScrollView
+            style={{flex:1,position:'relative'}}
+            // scrollEventThrottle = {200}
+            // onScroll={this.onMove.bind(this)}
+            >
+                <View style={[styles.container]}>
+                    <View style={styles.report_data}>
+                        <View style={[styles.report_date,!show && {justifyContent:'flex-end'}]}>
+                            {
+                                show ?  <Text style={styles.report_date_text}>
+                                    汇报人: {add_user}
+                                </Text> : null
+                            }
+                            <Text style={styles.report_date_text}>
+                                {report_week_msg}
+                            </Text>
+                        </View>
 
-                    {   this.state.id ?
-                        mock.report_data.map(item=>
-                            <ReportInput key={item.title}
-                                         edit={this.state.edit}
-                                         onChange={this.onChange}
-                                         {...item}/>
-                        ) : mock1.report_data.map(item=>
-                            <ReportInput key={item.title}
-                                         edit={this.state.edit}
-                                         onChange={this.onChange}
-                                         {...item}/>
-                        )
-                    }
-                </View>
-                <View style={styles.report_data}>
-                    <View style={styles.report_title}>
-                        <Text style={styles.font16}>
-                            工作内容
-                        </Text>
+                        <View style={styles.report_title}>
+                            <Text style={styles.font16}>客户统计</Text>
+                        </View>
+                        {
+                            Object.keys(input_titles).map(key=>
+                                <ReportInput key={input_titles[key]}
+                                             title={input_titles[key]}
+                                             edit={this.state.edit}
+                                             data={this.props.details[key]}
+                                             name={this.props.details[key]}
+                                             onChange={this.onChange.bind(this)}/>
+                            )
+                        }
                     </View>
-                    <ReportTexteara
-                        subtitle="工作中的困难"
-                        edit={this.state.edit}
-                        data={this.state.id ?mock.report_demand : mock1.report_demand}/>
-                    <ReportTexteara
-                        subtitle="对公司的建议"
-                        edit={this.state.edit}
-                        data={this.state.id ? mock.report_work_content : mock1.report_work_content}/>
-                    <ReportTexteara
-                        subtitle="生活中的困难"
-                        edit={this.state.edit}
-                        data={this.state.id ? mock.report_work_content : mock1.report_work_content}/>
-                    <ReportTexteara
-                        subtitle="本周工作内容"
-                        edit={this.state.edit}
-                        data={this.state.id ? mock.report_work_content : mock1.report_work_content}/>
-                    <ReportTexteara
-                        subtitle="下周工作计划"
-                        edit={this.state.edit}
-                        data={this.state.id ? mock.report_work_content : mock1.report_work_content}/>
-                    <ReportTexteara
-                        subtitle="面谈客户类型"
-                        edit={this.state.edit}
-                        data={this.state.id ? mock.report_work_content : mock1.report_work_content}/>
-                    <ReportTexteara
-                        subtitle="见面浅谈事宜"
-                        edit={this.state.edit}
-                        data={this.state.id ? mock.report_work_content : mock1.report_work_content}/>
+                    <View style={{marginTop: 10}}>
+                        <TabNavigation
+                            // fixed={this.state.fixed}
+                            screens={() => ScreenList()}
+                            initialScreen='汇报内容'
+                        />
+                    </View>
                 </View>
-            </ScrollView>
-        )
+            </ScrollView>)
     }
 }
 
+
+export default connect(
+    ({WRDetails:{details}})=>{
+        console.log('details',details);
+        return ({details})
+    },
+    (dispatch) => ({
+        init: bindActionCreators(Actions, dispatch)
+    })
+)(Screen)
+
+
 const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#EBEFF2'
+    },
     report_data:{
         width,
         backgroundColor: '#fff',
@@ -174,7 +193,7 @@ const styles = StyleSheet.create({
         lineHeight: 16,
         alignItems: 'center',
         flexDirection:'row',
-        marginTop: 10,
+        marginVertical: 10,
     },
     font16:{
         fontSize: 16
@@ -184,4 +203,3 @@ const styles = StyleSheet.create({
         color: '#999'
     }
 });
-export default MyReportDetail

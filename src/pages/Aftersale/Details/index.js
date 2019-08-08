@@ -7,6 +7,8 @@ import Actions from './_actions';
 import styles from '../_styles';
 import BaseInfo from '../_Component_base_info';
 import Products from '../_Component_products';
+import Handle from '../_Component_handle';
+import Logs from '../_Component_logs'
 import {customNavigationOptions} from "../../../_Util";
 
 class Screen extends Component {
@@ -16,13 +18,23 @@ class Screen extends Component {
     });
     constructor(props) {
         super(props);
+
     };
     componentDidMount(): void {
         const {init,navigation:{state:{params:{id}}}} = this.props;
         init.fetch_detail({id})
     }
+    onHandle(deal_content){
+        const {init,navigation:{goBack,state:{params:{id}}}} = this.props;
+        init.post_handle({
+            as_id:id,
+            deal_content
+        },()=>{
+            goBack()
+        })
+    };
     render() {
-        const {base_info,prod_question,status, isSuccess} = this.props;
+        const {base_info,prod_question,status,log, isSuccess,navigation:{state:{params:{isHandle}}}} = this.props;
         return (
             <View style={styles.container}>
                 {
@@ -30,6 +42,15 @@ class Screen extends Component {
                         <ScrollView style={{flex: 1}}>
                             <BaseInfo base_info={base_info}/>
                             <Products products={prod_question}/>
+                            {
+                                log.length ? <Logs list={log}/> : null
+                            }
+                            {
+                                isHandle ?
+                                    <Handle onHandle={this.onHandle.bind(this)}/> :
+                                    null
+
+                            }
                         </ScrollView>
                         : <Loading>
                             {status}
@@ -39,7 +60,6 @@ class Screen extends Component {
         )
     }
 }
-
 export default connect(
     ({ADtails:{status,isSuccess,base_info,log,prod_question}}) => {
         return ({

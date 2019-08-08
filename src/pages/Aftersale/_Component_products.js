@@ -1,7 +1,9 @@
 import React from 'react'
 import {View, Text, Dimensions, Image} from 'react-native'
+import Item from './_Component_title'
 
 const {width} = Dimensions.get('window');
+
 const Products = ({products}) =>
     <View style={{width, flex: 1, backgroundColor: '#fff', paddingVertical: 5, marginTop: 10, paddingBottom: 15}}>
         {products && products.length ? products.map((product, index, list) =>
@@ -43,27 +45,7 @@ const Products = ({products}) =>
         </View>}
     </View>;
 
-const Item = ({title, value, border, icon, normal,top}) =>
-    <View style={[
-        {minHeight: 44, width: (width - 30), flexDirection: 'row'},
-        border ? {borderStyle:'dashed', borderBottomWidth: 1, borderColor: '#f2f2f2'} : null,
-        !top ? {alignItems: 'center'} : null
-        ]}>
-        {
-            icon ? <Image style={{height: 16, width: 16}} source={require('../../assets/images/report/icon.png')}/> : null
-        }
 
-        <Text style={[{color: '#999',fontSize: 14, marginRight: 10,justifyContent:'space-between',textAlign:'justify'},
-            !normal?
-            {width: 60, marginRight:20}: null]}>
-            {title.replace(/[\r\n]/g, "")}
-        </Text>
-        {
-            value? <Text style={{color: '#333', width:(width - 110), fontSize: 14, textAlign: 'auto'}}>
-                {value.replace(/[\r\n]/g, "")}
-            </Text> : null
-        }
-    </View>;
 const SubTitle = ({title}) =>
     <View style={{width, height: 32, justifyContent: 'center'}}>
         <Text style={{color: '#999999', fontSize: 12}}>

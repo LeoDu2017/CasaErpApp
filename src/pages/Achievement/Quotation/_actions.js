@@ -34,7 +34,7 @@ function fetch_quotations(year){
     }
 }
 
-function update_quotations(year){
+function update_data(year){
     return (dispatch) => {
         dispatch(doing());
         dispatch(fetch_quotations(year));
@@ -65,5 +65,5 @@ function error(){
 }
 export default{
     fetch_years,
-    update_quotations
+    update_data
 }

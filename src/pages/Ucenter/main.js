@@ -18,6 +18,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import styles from './_styles'
 import actions from './_actions'
+import axios from "axios";
 
 const win = Dimensions.get('window');
 
@@ -39,13 +40,18 @@ class Page extends Component{
         show ? this.setState({top:0})
             : this.setState({top: win.height});
     };
+    onSignOut(){
+        axios.defaults.headers.common['token'] = '';
+        this.props.navigation.navigate('LoginScreen')
+    };
     componentDidMount(): void {
-
+        const {init} = this.props;
+        init.fetch_data()
     };
     render(){
         const {
-            User:{name,title,telephone,department,avatar},
-            navigation:{push}
+            navigation:{push},
+            User:{comp_name,role_name,user_name,user_mobile}
         } = this.props;
         return(
             <View style={styles.container}>
@@ -59,14 +65,14 @@ class Page extends Component{
                                          source={require('../../assets/images/ucenter/info_bg.png')}>
                             <View style={styles.content_wrap_1_main}>
                                 <View>
-                                    <Text style={styles.user_name}>{name}</Text>
-                                    <Text style={styles.user_title}>{title}</Text>
-                                    <Text style={styles.user_phone}>手机号：{telephone}</Text>
-                                    <Text style={styles.user_company}>{department}</Text>
+                                    <Text style={styles.user_name}>{user_name}</Text>
+                                    <Text style={styles.user_title}>{role_name}</Text>
+                                    <Text style={styles.user_phone}>手机号：{user_mobile}</Text>
+                                    <Text style={styles.user_company}>{comp_name}</Text>
                                 </View>
                                 <Image
                                     style={styles.user_avatar}
-                                    source={avatar}/>
+                                    source={require('../../assets/images/ucenter/avatar.png')}/>
                             </View>
                         </ImageBackground>
 
@@ -111,7 +117,7 @@ class Page extends Component{
                 </View>
                 <Animated.View style={{...styles.drawer, top: this.state.top}}>
                     <View style={styles.drawer_container}>
-                        <TouchableOpacity onPress={()=>{this.setState({top:0})}}>
+                        <TouchableOpacity onPress={()=>{this.onSignOut()}}>
                             <View style={[styles.drawer_item,styles.exit]}>
                                 <Text style={[styles.blue,styles.drawer_item_text]}>退出</Text>
                             </View>
@@ -126,7 +132,6 @@ class Page extends Component{
             </View>
         )
     };
-
     componentWillUnmount(): void {
         this._navListener.remove();
     };
@@ -139,6 +144,6 @@ export default connect(
         }
     },
     (dispatch) => ({
-        actions: bindActionCreators(actions, dispatch)
+        init: bindActionCreators(actions, dispatch)
     })
 )(Page)

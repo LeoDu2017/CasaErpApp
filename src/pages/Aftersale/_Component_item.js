@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React,{PureComponent} from 'react'
 import {View, Text, TouchableOpacity} from 'react-native'
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 import styles from './_styles'
@@ -14,16 +14,26 @@ const Item = ({title,value}) =>
     </Text>
 </View>;
 
-class Screen extends Component{
-    state = {
-        visible: false,
-        selected: 0
-    };
+class Screen extends PureComponent{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            visible: false,
+            selected: 0
+        }
+    }
     setModalVisible(visible) {
         this.setState({ visible: visible });
     };
     onSelect(index, value){
-
+        this.setState({selected:value})
+    };
+    onModify(){
+        this.props.onUpdate({
+            id:this.props.id,
+            service_status: this.state.selected
+        },()=>{this.setModalVisible(false)});
     };
     render(){
         const {
@@ -32,7 +42,7 @@ class Screen extends Component{
             onNav,
             contract_code,
             button_process,
-            status,
+            AfterSaleStatusList,
             button_change_status,
         } = this.props;
         const titles = {
@@ -41,6 +51,7 @@ class Screen extends Component{
             delivery_user_name:'配送人',
             service_status_name:'状态',
         };
+
         return (
             <TouchableOpacity onPress={()=>{onNav(url,{id})}}>
                 <View style={styles.item}>
@@ -63,6 +74,7 @@ class Screen extends Component{
                                 <CustomModal
                                     title='请选择售后状态'
                                     onCancle={()=>{this.setModalVisible(false)}}
+                                    onOk={()=>{this.onModify()}}
                                     visible={this.state.visible}>
                                      <RadioGroup
                                          size={24}
@@ -70,7 +82,7 @@ class Screen extends Component{
                                          color='#E6E6E6'
                                          onSelect = {(index, value) => this.onSelect(index, value)}>
                                          {
-                                             status.map(item =>
+                                             AfterSaleStatusList.map(item =>
                                                  <RadioButton
                                                      color='#3496FB'
                                                      activeColor='#3496FB'
@@ -84,7 +96,7 @@ class Screen extends Component{
                             </TouchableOpacity> : null
                         }{
                             button_process.status ?
-                            <TouchableOpacity onPress={()=>{alert(button_process.title)}}>
+                            <TouchableOpacity onPress={()=>{onNav(url,{id,isHandle:true})}}>
                                 <Text style={styles.buttonBackground}>{button_process.title}</Text>
                             </TouchableOpacity> : null
                         }

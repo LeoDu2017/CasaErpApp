@@ -1,19 +1,21 @@
-'use strict'
-
+'use strict';
+import {SET_USER_DATA} from './_actionTypes'
 import {createReducer} from '../../_Util'
-
 const initialState = {
-    name: '四月天',
-    title: 'UI设计师',
-    telephone: '18012345678',
-    department: '杭州分公司',
-    avatar: require('../../assets/images/ucenter/avatar.png'),
-    password: ''
+    user_name: '',
+    user_mobile: '',
+    comp_name: '',
+    role_name:'',
 };
 
+
 const actionHandler = {
-    modify_password: (state) => {
-        return state
+   [SET_USER_DATA]: (state,action) => {
+       const {payload} = action;
+       return {
+           ...state,
+           ...payload,
+       }
     }
 };
 

@@ -1,62 +1,71 @@
-import {FETCH_REPORT_DETAIL,FETCH_REPORT_SUCCESS,FETCH_REPORT_ERROR} from './_actionTypes'
-
-const report = {
-    report_data: [
-        {
-            title: '分配数',
-            data: '1000',
-        },{
-            title: '有效数',
-            data: '800',
-        },{
-            title: '待定数',
-            data: '100',
-        },{
-            title: '微信群数',
-            data: '20',
-        },{
-            title: '拜访数',
-            data: '120',
-        },{
-            title: '报价数',
-            data: '100',
-        },{
-            title: '到店数',
-            data: '200',
-        },{
-            title: '总有效数',
-            data: '1000',
-        }
-    ],
-    report_work_content: '沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.',
-    report_demand:'沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.沙发是家中的必备家具，是装点客厅的利器，在一定程度上能决定整个家居环境的美观度。从形状分，沙发可被分为单人沙发.'
+import {FETCH_REPORT_DETAIL,FETCH_REPORT_SUCCESS,FETCH_REPORT_ERROR,UPDATE_REPORT,SET_REPORT} from './_actionTypes'
+import {Report_fetch_mine_detail,Report_update_mine} from "../../../../_Service";
+const init_details ={
+    details:{
+        id: 0,
+        report_day: "",
+        work_content: "",
+        num_fp: 0,
+        num_yx: 0,
+        num_wx: 0,
+        num_dd: 0,
+        num_bj: 0,
+        num_zs: 0,
+        num_wxin: 0,
+        num_dds: 0,
+        num_bf: 0,
+        num_jjwt: "",
+        report_status: 0
+    }
 };
-
-const fetch_report = () => {
+const fetch_report = (data) => {
+    const {id} = data;
     return dispatch => {
         dispatch(doing());
-        let result = fetch('https://www.baidu.com/')
-            .then((res) => {
-                dispatch(success(report)); // 登录请求完成
-            }).catch((e) => {
-                dispatch(error(false)); // 登录请求出错
-            })
-    }
-};
-const update_report = () => {
-    return dispatch => {
+        id ? dispatch(()=>{
+            Report_fetch_mine_detail(data).then(
+                ({status,data,msg}) => {
+                    if(status){
+                        dispatch(success());
+                        dispatch(set_detail(data))
+                    }else{
 
+                    }
+                }
+            ).catch()
+        }) : dispatch(()=>{
+            dispatch(success());
+            dispatch(set_detail(init_details))
+        })
     }
 };
+const update_report = (data,successCallback=null,failCallback=null) => {
+    return dispatch => {
+        Report_update_mine(data).then(
+            ({status,data,msg}) => {
+                if(status){
+                    dispatch(()=>{successCallback && successCallback()})
+                }else{
+                    dispatch(()=>{failCallback && failCallback(msg)})
+                }
+            }
+        ).catch()
+    }
+};
+function set_detail(details){
+    return {
+        type:SET_REPORT,
+        payload:{details}
+    }
+}
 function doing(){
     return{
         type:FETCH_REPORT_DETAIL
     }
 }
-function success(report){
+function success(){
     return{
         type:FETCH_REPORT_SUCCESS,
-        report
     }
 }
 function error(){

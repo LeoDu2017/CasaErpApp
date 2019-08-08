@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet, TextInput, Image} from 'react-native'
+import {View, Text, StyleSheet, TextInput, Image, Dimensions} from 'react-native'
 export default ({edit,title,subtitle,data,name}) =>
     <View  style={styles.texteara_wrap}>
         {
@@ -35,19 +35,20 @@ export default ({edit,title,subtitle,data,name}) =>
                         </View>
                     </View> : [
                         <Text
-                            numberOfLines={3}
+                            key='content_title'
                             style={styles.font16}>
                             {data}
                         </Text>, subtitle &&
-                        <View style={styles.line}/>
+                        <View key='content_subtitle'  style={styles.line}/>
                     ]
             }
         </View>
     </View>;
-
+const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
     texteara_wrap:{
-        flex: 1
+        width,
+        paddingHorizontal:15
     },
     font16:{
         fontSize: 16,

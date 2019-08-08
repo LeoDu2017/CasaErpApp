@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor: '#EBEFF2'
     },
     report_data:{
         width,

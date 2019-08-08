@@ -10,10 +10,10 @@ export default class App extends React.Component {
         const {chartConfig,title,title_color,sale_data} = this.props;
 
         const width = Dimensions.get('window').width - 20;
-        const height = 420;
+        const height = Dimensions.get('window').width - 20;
+
         const labelStyle = {
             color: title_color,
-            marginVertical: 10,
             textAlign: 'center',
             fontSize: 16,
             fontWeight: '700'

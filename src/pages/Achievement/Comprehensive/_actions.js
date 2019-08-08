@@ -33,7 +33,7 @@ const fetch_sales = (year) => {
         })
     }
 };
-function update_sales(year){
+function update_data(year){
     return (dispatch) => {
         dispatch(fetch_sales(year))
     }
@@ -68,5 +68,5 @@ function set_sales(data){
 }
 export default{
     fetch_years,
-    update_sales
+    update_data
 }

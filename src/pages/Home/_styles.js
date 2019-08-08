@@ -50,6 +50,18 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 10,
         marginTop: 2
+    },
+    subscript: {
+        width: 20,
+        height: 20,
+        textAlign: 'center',
+        lineHeight: 20,
+        backgroundColor: 'red',
+        borderRadius: 10,
+        position: 'absolute',
+        top: 0,
+        right: '15%',
+        color: '#fff',
     }
 });
 export default styles
